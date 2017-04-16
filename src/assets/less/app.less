@@ -161,7 +161,7 @@ html, body {
 
 		.title {
 			display: block;
-			padding: 10px 20px;
+			padding: 10px 20px !important;
 			color: @cbl;
 			font-weight: 700;
 		}
@@ -193,8 +193,27 @@ html, body {
 			line-height: 40px;
 		}
 		.conference {
+			display: block;
+
+			label {
+				display: block;
+				padding: 0 20px;
+				color: @cbl;
+			}
 			.title {
 				font-size: 22px;
+
+				a {
+					color: @cbl;
+				}
+			}
+			.subtitle {
+				font-weight: 600;
+			}
+			.group {
+				label {
+					display: inline-block;
+				}
 			}
 		}
 	}

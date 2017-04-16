@@ -11,7 +11,9 @@
 				<% if (conferences.length > 0) { %>
 					<% for(var i = 0; i < conferences.length; i++) { %>
 						<div class='conference'>
-							<label class='title'><%= conferences[i].Title %></label>
+							<label class='title'><a href="conferences/<%= conferences[i].id %>"><%= conferences[i].Title %></a></label>
+							<label class='subtitle'>Dates</label>
+							<span class='group'><label>From: <%= JSON.parse(conferences[i].Dates)[0] %></label><label>To: <%= JSON.parse(conferences[i].Dates)[1] %></label></span>
 						</div>
 					<% } %>
 				<% } else { %>

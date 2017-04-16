@@ -39,6 +39,7 @@ module.exports = {
 				connection.query(query, function(err, results) {
 					if (err) {
 						console.log(err);
+						connection.destroy();
 					}
 
 					var results = results || [];
