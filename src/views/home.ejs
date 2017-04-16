@@ -1,0 +1,22 @@
+<div class='wrapper'>
+	<div class='section'>	
+		<div class='conferenceswrapper'>
+			<label class='title'>Your Conferences</label>
+			<div class='action'>
+				<a class='button green' href='/create/conference'>Create a Conference</a>
+			</div>
+			
+			<div class='conferences'>
+				<% if (conferences.length > 0) { %>
+					<% for(var i = 0; i < conferences.length; i++) { %>
+						<div>
+							<label class='title'>conferences[i].Title</label>
+						</div>
+					<% } %>
+				<% } else { %>
+					<label class='none'>You do not have any conferences</label>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</div>

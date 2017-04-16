@@ -40,15 +40,15 @@ module.exports = {
 		connection.query(query, function(err, results) {
 			if (err) {
 				res.send('There has been an error!');
-				console.log(err);
+				connection.destroy();
 			} else {
 				sess.guest = false;
 				sess.userid = results.insertId;
 				res.redirect('http://localhost:3000/@me');
+
+				connection.destroy();
 			}
 		});
-
-		connection.destroy();
 	}
 	
 }

@@ -40,11 +40,14 @@ module.exports = {
 		connection.query(query, function(err, results) {
 			if (err) {
 				res.send('There has been an error');
+				connection.destroy();
 			} else {
 				sess.guest = false;
 				sess.userid = results[0].id;
-				console.log(sess);
+
 				res.redirect('http://localhost:3000/@me');
+
+				connection.destroy();
 			}
 		});
 	}

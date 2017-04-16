@@ -3,12 +3,16 @@ const less = require('gulp-less');
 const concat = require('gulp-concat');
 const minify = require('gulp-minify');
 const babel = require('gulp-babel');
+var webpack = require('gulp-webpack');
 
 gulp.task('default', ['less', 'js', 'watch']);
 
 gulp.task('js', function() {
 	gulp.src('js/app.js')
 		.pipe(babel({presets: ['es2015']}))
+		.pipe(webpack({
+			output: {filename: 'app.js'}
+		}))
 		.pipe(minify())
 		.pipe(gulp.dest('../public/js'));
 });

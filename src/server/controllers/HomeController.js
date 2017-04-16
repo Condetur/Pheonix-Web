@@ -27,14 +27,29 @@ module.exports = {
 		if (data) {
 			if (data.guest == false) {
 				var userId = data.userId;
-			} 
-		}
-		res.redirect('/');
 
-		if (data && data.guest == false) {
-			res.render('home.ejs', {title: 'Pheonix', guest: false, auth: false});
+				connection.connect(function(err) {
+					if (err) {
+						console.log(err);
+					}
+				});
+
+				var query = "SELECT * FROM Conferences WHERE UserId = '" + userId + "' ORDER BY id DESC";
+
+				connection.query(query, function(err, results) {
+					if (err) {
+						console.log(err);
+					}
+
+					var results = results || [];
+
+					res.render('home.ejs', {title: 'Pheonix', guest: false, auth: false, conferences: results});
+				});
+			}  else {
+				res.redirect('/');
+			}
 		} else {
-			
+			res.redirect('/');
 		}
 	}
 
