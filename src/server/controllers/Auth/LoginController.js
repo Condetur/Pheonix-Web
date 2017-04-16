@@ -19,7 +19,7 @@ module.exports = {
 		}
 
 		if (guest) {
-			res.render('login.ejs', {guest: guest, title: 'Pheonix', auth: true})
+			res.render('auth/login.ejs', {guest: guest, title: 'Pheonix', auth: true})
 		} else {
 			res.redirect('/@me');
 		}

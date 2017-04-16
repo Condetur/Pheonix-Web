@@ -1,2 +1,5 @@
 var $ = require('jquery');
-require('jquery-ui');
+var Pikaday = require('pikaday');
+
+new Pikaday({field: $('.from')[0]});
+new Pikaday({field: $('.to')[0]});

@@ -26,7 +26,7 @@ module.exports = {
 		
 		if (data) {
 			if (data.guest == false) {
-				var userId = data.userId;
+				var userId = data.userid;
 
 				connection.connect(function(err) {
 					if (err) {
@@ -34,7 +34,7 @@ module.exports = {
 					}
 				});
 
-				var query = "SELECT * FROM Conferences WHERE UserId = '" + userId + "' ORDER BY id DESC";
+				var query = "SELECT * FROM `Conferences` WHERE UserId = '" + userId + "' ORDER BY id DESC";
 
 				connection.query(query, function(err, results) {
 					if (err) {

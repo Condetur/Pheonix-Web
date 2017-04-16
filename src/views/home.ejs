@@ -7,10 +7,11 @@
 			</div>
 			
 			<div class='conferences'>
+				<label class='title'>Conferences</label>
 				<% if (conferences.length > 0) { %>
 					<% for(var i = 0; i < conferences.length; i++) { %>
-						<div>
-							<label class='title'>conferences[i].Title</label>
+						<div class='conference'>
+							<label class='title'><%= conferences[i].Title %></label>
 						</div>
 					<% } %>
 				<% } else { %>

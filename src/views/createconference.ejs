@@ -1,0 +1,38 @@
+<link href="/css/pikaday.css" rel="stylesheet">
+<div class='wrapper'>
+	<form class='form' role="form" method="POST" action="/controller/create">
+
+		<label class='title'>Create a Conference</label>
+
+		<div class="form-group">
+            <label for="name" class="control-label">Conference Name</label>
+
+            <div>
+                <input id="name" type="text" class="form-control" name="title" required autofocus>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="name" class="control-label">Contact Email</label>
+
+            <div>
+                <input id="name" type="text" class="form-control" name="email" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name" class="control-label">Dates</label>
+
+            <div class='group'>
+                <input id="name" type="text" class="form-control from" name="from" required>
+                <input id="name" type="text" class="form-control to" name="to" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+                Continue
+            </button>
+        </div>
+	</form>
+</div>
