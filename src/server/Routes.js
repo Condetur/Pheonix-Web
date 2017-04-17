@@ -7,10 +7,13 @@ module.exports = {
 		['get', '/@me', 'Home@home'],
 		['get', '/create/conference','Conference@index'],
 		['get', '/conferences/:conferenceId', 'Conference@home'],
+		['get', '/conferences/:conferenceId/addcommitee', 'Conference@addCommitee'],
+		['get', '/conferences/:conferenceId/edit', 'Conference@editConference'],
 
 		['post', '/user/register', 'Auth/Register@register'],
 		['post', '/user/login', 'Auth/Login@login'],
-		['post', '/controller/create', 'Conference@create']
+		['post', '/conference/create', 'Conference@create'],
+		['post', '/conference/update', 'Conference@edit']
 	]
 	
 }

@@ -19,7 +19,7 @@ module.exports = {
 			guest = true;
 		}
 
-		res.render('createconference.ejs', {title: 'Pheonix', guest: guest, auth: true});
+		res.render('conference/createconference.ejs', {title: 'Pheonix', guest: guest, auth: true});
 	},
 
 	create: function(req, res) {
@@ -76,7 +76,61 @@ module.exports = {
 				isOwner = true;
 			}
 
-			res.render('conference.ejs', {guest: data.guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, committees: []});
+			var guest = data.guest || true;
+
+			res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, committees: []});
+		});
+	},
+
+	addCommittee: function(req, res) {
+
+	},
+
+	editConference: function(req, res) {
+		var data = req.session;
+		var conferenceId = req.params.conferenceId;
+
+		connection.connect(function(err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+
+		var query = "SELECT * FROM `Conferences` WHERE id= '" + conferenceId + "' AND UserId = '" + conferenceId + "'";
+
+		connection.query(query, function(err, results) {
+			if (err) {
+				console.log(err);
+				connection.destroy();
+				res.redirect('/');
+			}
+
+			if (results.length > 0) {
+				res.render('conference/editconference.ejs', {guest: data.guest, auth: false, data: results[0]});
+			} else {
+				res.redirect('/conference/' + conferenceId);
+			}
+		});
+	},
+
+	edit: function(req, res) {
+		var data = req.body;
+
+		connection.connect(function(err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+
+		var dates = JSON.stringify([data.from, data.to]);
+
+		var query = "UPDATE `Conferences` SET `Title` = '" + data.name + "', `Dates` = '" + dates + "', `Email` = '" + data.email + "' WHERE `id` = '" + data.id + "'";
+		connection.query(query, function(err, results) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.redirect('/conferences/' + data.id);
+			}
 		});
 	}
 

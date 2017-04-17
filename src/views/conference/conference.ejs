@@ -19,10 +19,8 @@
 		<div class='bottom'>
 			<div class='group'>
 				<label class='title'>Committees</label>
-				<% if (guest) { %>
-					<a href='/register' class='add button'>Register To Join This Conference</a>
-				<% } else { %>
-					<a href='/conferences/<%= conference.id %>/join' class='add button'>Register To Join This Conference</a>
+				<% if (isOwner && committees.length < 1) { %>
+					<a href='/conferences/<%= conference.id %>/addcommittee' class='add button'>Add a Committee</a>
 				<% } %>
 			</div>
 			<% if (committees.length > 0) { %>
