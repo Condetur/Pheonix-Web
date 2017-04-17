@@ -6,6 +6,7 @@ module.exports = {
 		['get', '/login', 'Auth/Login@index'],
 		['get', '/@me', 'Home@home'],
 		['get', '/create/conference','Conference@index'],
+		['get', '/conferences/:conferenceId', 'Conference@home'],
 
 		['post', '/user/register', 'Auth/Register@register'],
 		['post', '/user/login', 'Auth/Login@login'],

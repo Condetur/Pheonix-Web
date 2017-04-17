@@ -7,19 +7,23 @@
 			</div>
 			
 			<div class='conferences'>
-				<label class='title'>Conferences</label>
 				<% if (conferences.length > 0) { %>
 					<% for(var i = 0; i < conferences.length; i++) { %>
 						<div class='conference'>
 							<label class='title'><a href="conferences/<%= conferences[i].id %>"><%= conferences[i].Title %></a></label>
-							<label class='subtitle'>Dates</label>
+							<label class='subtitle'>Dates:</label>
 							<span class='group'><label>From: <%= JSON.parse(conferences[i].Dates)[0] %></label><label>To: <%= JSON.parse(conferences[i].Dates)[1] %></label></span>
+							<label class='subtitle'>Contact Email:</label>
+							<label><a href='mailto: <%= conferences[i].Email %>'><%= conferences[i].Email %></a></label>
 						</div>
 					<% } %>
 				<% } else { %>
 					<label class='none'>You do not have any conferences</label>
 				<% } %>
 			</div>
+		</div>
+		<div class='delegationswrapper'>
+			<label class='title'>Your Committees</label>
 		</div>
 	</div>
 </div>

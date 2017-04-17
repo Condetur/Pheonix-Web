@@ -5,6 +5,7 @@ var connection = mysql.createConnection({
 	password: 'Tino0211',
 	database: 'Pheonix'
 });
+var moment = require('moment');
 
 module.exports = {
 
@@ -49,6 +50,34 @@ module.exports = {
 		} else {
 			res.redirect('/');
 		}
+	},
+
+	home: function(req, res) {
+		var conferenceId = req.params.conferenceId;
+		var data = req.session;
+
+		connection.connect(function(err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+
+		var query = "SELECT * FROM `Conferences` WHERE id = '" + conferenceId + "'";
+
+		connection.query(query, function(err, results) {
+			if (err) {
+				console.log(err);
+				connection.destroy();
+				res.redirect('/');
+			}
+
+			var isOwner = false;
+			if (conferenceId == data.userid) {
+				isOwner = true;
+			}
+
+			res.render('conference.ejs', {guest: data.guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, committees: []});
+		});
 	}
 
 }

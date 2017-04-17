@@ -1,0 +1,32 @@
+<div class='wrapper'>
+	<div class='conferencepage'>
+		<div class='top'>
+			<label class='title'><%= conference.Title %></label>
+			<% if (isOwner) { %>
+				<a href='/conferences/<%= conference.id %>/edit' class='edit button'>Edit</a>
+			<% } %>
+		</div>
+		<div class='center'>
+			<p><%= conference.Description %></p>
+			<div class='dates'>
+				<label>Dates:</label>
+				<div class='group'>
+					<label>From: <%= moment(JSON.parse(conference.Dates)[0]).format('dddd MMMM DD') %></label>
+					<label>To: <%= moment(JSON.parse(conference.Dates)[1]).format('dddd MMMM DD') %></label>
+				</div>
+			</div>
+		</div>
+		<div class='bottom'>
+			<div class='group'>
+				<label class='title'>Committees</label>
+				<% if (guest) { %>
+					<a href='/register' class='add button'>Register To Join This Conference</a>
+				<% } else { %>
+					<a href='/conferences/<%= conference.id %>/join' class='add button'>Register To Join This Conference</a>
+				<% } %>
+			</div>
+			<% if (committees.length > 0) { %>
+			<% } %>
+		</div>
+	</div>
+</div>
