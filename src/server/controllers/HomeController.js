@@ -44,7 +44,7 @@ module.exports = {
 
 					var results = results || [];
 
-					res.render('home.ejs', {title: 'Pheonix', guest: false, auth: false, conferences: results});
+					res.render('home.ejs', {title: 'Pheonix', guest: data.guest, auth: false, conferences: results});
 				});
 			}  else {
 				res.redirect('/');

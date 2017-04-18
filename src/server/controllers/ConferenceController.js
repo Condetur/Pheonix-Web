@@ -83,7 +83,14 @@ module.exports = {
 	},
 
 	addCommittee: function(req, res) {
+		var conferenceId = req.params.conferenceId;
+		var data = req.session;
 
+		if (data.guest == false) {
+			res.render('createcommittee', {guest: false, auth: false});
+		} else {
+			res.redirect('/');
+		}
 	},
 
 	editConference: function(req, res) {
