@@ -82,17 +82,6 @@ module.exports = {
 		});
 	},
 
-	addCommittee: function(req, res) {
-		var conferenceId = req.params.conferenceId;
-		var data = req.session;
-
-		if (data.guest == false) {
-			res.render('createcommittee', {guest: false, auth: false});
-		} else {
-			res.redirect('/');
-		}
-	},
-
 	editConference: function(req, res) {
 		var data = req.session;
 		var conferenceId = req.params.conferenceId;
@@ -139,6 +128,42 @@ module.exports = {
 				res.redirect('/conferences/' + data.id);
 			}
 		});
+	},
+
+	addCommittee: function(req, res) {
+		var conferenceId = req.params.conferenceId;
+		var data = req.session;
+
+		if (data.guest == false) {
+			res.render('createcommittee', {guest: false, auth: false, conferenceId: conferenceId});
+		} else {
+			res.redirect('/');
+		}
+	},
+
+	createCommittee: function(req, res) {
+		var data = req.body;
+		var sess = req.session;
+
+		if (sess.guest == false) {
+			
+		}
+	},
+
+	addDelegation: function(req, res) {
+		var conferenceId = req.params.conferenceId;
+		var data = req.session;
+
+		if (data.guest == false) {
+			res.render('createdelegation', {guest: false, auth: false, conferenceId: conferenceId});
+		} else {
+			res.redirect('/');
+		}
+	},
+
+	createDelegation: function(req, res) {
+		var data = req.body;
+		var sess = req.session;
 	}
 
 }

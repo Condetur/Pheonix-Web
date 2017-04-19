@@ -1,0 +1,76 @@
+<link rel='stylesheet' href='/css/mdl.css'/>
+
+<div class='wrapper' style='padding-bottom:50px;'>
+	<form class='form' method='post' action='/committee/createdelegation'>
+		<input hidden name='id' value="<%= conferenceId %>"/>
+		<div class='form-group'>
+			<label>Delegation Name</label>
+
+			<div>
+				<input name='name' required autofocus/>
+			</div>
+		</div>
+		<div class='form-group'>
+			<label>Number of Delegates</label>
+
+			<div>
+				<input name='numdelegates' required/>
+			</div>
+		</div>
+		<div class='form-group t'>
+			<label style='padding-bottom:20px;'>Teacher Info</label>
+
+			<div class='teacher'>
+				<div>
+					<label>Teacher Name</label>
+					<input name='teachername' required/>
+				</div>
+				<div>
+					<label>Teacher Email</label>
+					<input name='teacheremail' required/>
+				</div>
+			</div>
+		</div>
+		<button type='button' id='btn1' class='btncircle teacheradd'>+</button>
+		<div class='form-group'>
+			<div>
+				<label>Card Number</label>
+				<input name='cardnumber'/>
+			</div>
+			<div class='group'>
+				<div>
+					<label>First Name</label>
+					<input name='firstname'/>
+				</div>
+				<div>
+					<label>Last Name</label>
+					<input name='lastname'/>
+				</div>
+			</div>
+			<div class='group'>
+				<div>
+					<label>Expire Month</label>
+					<input name='month'/>
+				</div>
+				<div>
+					<label>Expire Year</label>
+					<input name='year'/>
+				</div>
+			</div>
+			<div>
+				<label>CCV Number</label>
+				<input name='ccv'/>
+			</div>
+		</div>
+		<div class='form-group'>
+			<button type="submit" class="btn btn-primary">
+                Continue
+            </button>
+		</div>
+	</form>
+</div>
+
+<!-- Rich Tooltip -->
+<div class="mdl-tooltip" data-mdl-for="btn1" style='font-size: 14px;'>
+Add another teacher.
+</div>

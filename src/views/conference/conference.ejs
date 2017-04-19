@@ -19,12 +19,18 @@
 		<div class='bottom'>
 			<div class='group'>
 				<label class='title'>Committees</label>
-				<% if (isOwner && committees.length < 1) { %>
+				<% if (isOwner) { %>
 					<a href='/conferences/<%= conference.id %>/addcommittee' class='add button'>Add a Committee</a>
 				<% } %>
 			</div>
 			<% if (committees.length > 0) { %>
 			<% } %>
+			<div class='group'>
+				<label class='title'>Delegations</label>
+				<% if (isOwner) { %>
+					<a href='/conferences/<%= conference.id %>/adddelegation' class='add button'>Add a Delegation</a>
+				<% } %>
+			</div>
 		</div>
 	</div>
 </div>

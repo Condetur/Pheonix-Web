@@ -2,6 +2,7 @@
 
 <div class='wrapper' style='padding-bottom:50px;'>
 	<form class='form' method='post' action='/committee/create'>
+		<input hidden name='id' value="<%= conferenceId %>"/>
 		<div class='form-group'>
 			<label>Committee Name</label>
 
@@ -27,11 +28,11 @@
 			<div class='dais'>
 				<div>
 					<label>Dais Name</label>
-					<input name='daisname[]' required/>
+					<input name='daisname' required/>
 				</div>
 				<div>
 					<label>Dais Email</label>
-					<input name='daisemail[]' required/>
+					<input name='daisemail' required/>
 				</div>
 			</div>
 		</div>
@@ -43,16 +44,22 @@
 				<div class='group'>
 					<div>
 						<label>Student Name</label>
-						<input name='studentname[]' required/>
+						<input name='studentname' required/>
 					</div>
 					<div>
 						<label>Student Email</label>
-						<input name='studentemail[]' required/>
+						<input name='studentemail' required/>
 					</div>
 				</div>
-				<div>
-					<label>Student's School</label>
-					<input name='studentschool[]' required/>
+				<div class='group'>
+					<div>
+						<label>Student's School</label>
+						<input name='studentschool' required/>
+					</div>
+					<div>
+						<label>Country</label>
+						<input name='studentschool' required/>
+					</div>
 				</div>
 			</div>
 		</div>

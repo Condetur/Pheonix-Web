@@ -43,7 +43,7 @@ module.exports = {
 				connection.destroy();
 			} else {
 				sess.guest = false;
-				sess.userid = results[0].id;
+				sess.userid = results[0].id || results.id;
 
 				res.redirect('http://localhost:3000/@me');
 
