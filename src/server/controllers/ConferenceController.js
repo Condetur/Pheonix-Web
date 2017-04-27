@@ -7,6 +7,27 @@ var connection = mysql.createConnection({
 });
 var moment = require('moment');
 
+connection.connect(function(err) {
+	if (err) {
+		console.log(err);
+	}
+});
+
+function getDelegations(conferenceId, callback) {
+	var out = [];
+	var query = "SELECT * FROM `Delegation` WHERE `ConferenceId` = '" + conferenceId + "'";
+
+	connection.query(query, function(err, res) {
+		if (err) {
+			out = [];
+		} else {
+			out = res;
+		}
+
+		callback(out);
+	});
+}
+
 module.exports = {
 
 	index: function(req, res) {
@@ -27,12 +48,6 @@ module.exports = {
 		var sess = req.session;
 
 		if (sess.guest == false) {
-			connection.connect(function(err) {
-				if (err) {
-					console.log(err);
-					res.redirect('/');
-				}
-			});
 
 			var dates = JSON.stringify([data.from, data.to]);
 
@@ -56,12 +71,6 @@ module.exports = {
 		var conferenceId = req.params.conferenceId;
 		var data = req.session;
 
-		connection.connect(function(err) {
-			if (err) {
-				console.log(err);
-			}
-		});
-
 		var query = "SELECT * FROM `Conferences` WHERE id = '" + conferenceId + "'";
 
 		connection.query(query, function(err, results) {
@@ -76,21 +85,29 @@ module.exports = {
 				isOwner = true;
 			}
 
-			var guest = data.guest || true;
+			if (data.guest) {
+				var guest = data.guest;
+			} else {
+				var guest = false;
+			}
 
-			res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, committees: []});
+			getDelegations(conferenceId, function(resu) {
+				var delegations = resu;
+				var teachers = [];
+
+				delegations.forEach(function(el) {
+					var t = JSON.parse(el.Teachers);
+					teachers.push(t);
+				});
+
+				res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], teachers: teachers[0], isOwner: isOwner, moment: moment, delegations: delegations});
+			});
 		});
 	},
 
 	editConference: function(req, res) {
 		var data = req.session;
 		var conferenceId = req.params.conferenceId;
-
-		connection.connect(function(err) {
-			if (err) {
-				console.log(err);
-			}
-		});
 
 		var query = "SELECT * FROM `Conferences` WHERE id= '" + conferenceId + "' AND UserId = '" + conferenceId + "'";
 
@@ -111,13 +128,6 @@ module.exports = {
 
 	edit: function(req, res) {
 		var data = req.body;
-
-		connection.connect(function(err) {
-			if (err) {
-				console.log(err);
-			}
-		});
-
 		var dates = JSON.stringify([data.from, data.to]);
 
 		var query = "UPDATE `Conferences` SET `Title` = '" + data.name + "', `Dates` = '" + dates + "', `Email` = '" + data.email + "' WHERE `id` = '" + data.id + "'";
@@ -164,6 +174,53 @@ module.exports = {
 	createDelegation: function(req, res) {
 		var data = req.body;
 		var sess = req.session;
+
+		var conferenceId = 1;
+		var teachers = [];
+
+		if (data.teachername.length > 1) {
+			var t = 0;
+			while (data.teachername[t]) {
+				var d = {
+					teachername: data.teachername[t],
+					teacheremail: data.teacheremail[t]
+				};
+
+				teachers.push(d);
+
+				t++;
+			}
+		} else {
+			teachers = [{
+				teachername: data.teachername,
+				teacheremail: data.teacheremail
+			}]
+		}
+		
+		teachers = JSON.stringify(teachers);
+
+		var cardData = {
+			cardNumber: data.cardnumber,
+			ccv: data.ccv,
+			firstName: data.firstname,
+			lastName: data.lastname,
+			month: data.month,
+			year: data.year
+		};
+
+		cardData = JSON.stringify(cardData);
+
+		var query = "INSERT INTO `Delegation`(`ConferenceId`, `Name`, `NumDelegate`, `PayInfo`, `Teachers`) VALUES ('" + conferenceId + "', '" + data.name + "', '" + data.numdelegates + "', '" + cardData + "', '" + teachers + "')";
+
+		connection.query(query, function(err, results) {
+			if (err) {
+				console.log(err);
+				res.redirect('/');
+				throw err;
+			} else {
+				res.redirect('/conferences/' + conferenceId);
+			}
+		});
 	}
 
 }

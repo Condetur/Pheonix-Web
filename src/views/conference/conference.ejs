@@ -23,12 +23,35 @@
 					<a href='/conferences/<%= conference.id %>/addcommittee' class='add button'>Add a Committee</a>
 				<% } %>
 			</div>
-			<% if (committees.length > 0) { %>
-			<% } %>
 			<div class='group'>
 				<label class='title'>Delegations</label>
 				<% if (isOwner) { %>
 					<a href='/conferences/<%= conference.id %>/adddelegation' class='add button'>Add a Delegation</a>
+				<% } %>
+			</div>
+			<div class='group'>
+				<% if (delegations.length > 0) { %>
+					<% for (var i = 0; delegations[i]; i++) { %>
+						<div class='delegation'>
+							<div class='section'>
+								<label class='name'><%= delegations[i].Name %></label>
+								<span class='numdelegates'><%= delegations[i].NumDelegate %></span>
+							</div>
+							<div class='section'>
+								<label class='title'>Teachers</label>
+								<% if (teachers.length > 0) { %>
+									<% for (var i = 0; teachers[i]; i++ ) { %>
+										<div class='teacher'>
+											<div class='group'>
+												<span class='name'><%= teachers[i].teachername %></span>
+												<span class='email'><%= teachers[i].teacheremail %></span>
+											</div>
+										</div>
+									<% } %>
+								<% } %>
+							</div>
+						</div>
+					<% } %>
 				<% } %>
 			</div>
 		</div>
