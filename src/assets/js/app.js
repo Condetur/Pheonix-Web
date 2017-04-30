@@ -20,11 +20,14 @@ $('.teacheradd').click(function() {
 });
 
 $('.toggle-teachers').click(function() {
-	if ($('.content.teachers').hasClass('active')) {
-		$('.content.teachers').removeClass('active');
-		$('.toggle-teachers').removeClass('down');
+	var el = $(this);
+	var parent = el.parent().parent();
+	var target = parent.find('.teachers');
+	if (target.hasClass('active')) {
+		target.removeClass('active');
+		el.removeClass('down');
 	} else {
-		$('.content.teachers').addClass('active');
-		$('.toggle-teachers').addClass('down');
+		target.addClass('active');
+		el.addClass('down');
 	}
 });

@@ -31,25 +31,34 @@
 			</div>
 			<div class='group'>
 				<% if (delegations.length > 0) { %>
-					<% for (var i = 0; delegations[i]; i++) { %>
+					<% for(var i = 0; i < delegations.length; i++) { %>
 						<div class='delegation'>
 							<label class='name'><%= delegations[i].Name %></label>
 							<div class='section dropdown'>
 								<div>
 									<label class='title'>Teachers</label>
-									<span class='toggle-teachers toggle'></span>
+									<span class='toggle-teachers toggle <%= i %>'></span>
 								</div>
-								<div class='content teachers'>
+								<div class='content teachers <%= i %>'>
 									<% if (teachers.length > 0) { %>
-										<% for (var i = 0; teachers[i]; i++ ) { %>
+										<% for (var x = 0; x < teachers.length; x++ ) { %>
 											<div class='teacher'>
 												<div class='group'>
-													<span class='name'><%= teachers[i].teachername %></span>
-													<span class='email'><%= teachers[i].teacheremail %></span>
+													<span class='name'><%= teachers[x].teachername %></span>
+													<span class='email'><%= teachers[x].teacheremail %></span>
 												</div>
 											</div>
 										<% } %>
 									<% } %>
+								</div>
+							</div>
+							<div class='section dropdown'>
+								<div>
+									<label class='title'>Students</label>
+									<span class='toggle-students toggle'></span>
+								</div>
+								<div class='content students'>
+									
 								</div>
 							</div>
 						</div>

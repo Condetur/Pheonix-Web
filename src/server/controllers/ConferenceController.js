@@ -100,6 +100,7 @@ module.exports = {
 					teachers.push(t);
 				});
 
+
 				res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], teachers: teachers[0], isOwner: isOwner, moment: moment, delegations: delegations});
 			});
 		});
