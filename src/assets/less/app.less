@@ -305,6 +305,88 @@ html, body {
 	}
 }
 
+.delegation {
+	margin: 0 20px 10px;
+	padding: 0 10px;
+	box-shadow: none;
+	border-left: solid 3px #637282;
+	display: inline-block;
+
+	.name {
+		font-size: 20px;
+		font-weight: 700;
+		color: #637282;
+	}
+	.toggle {
+		width: 26px;
+		height: 26px;
+		position: relative;
+		cursor: pointer;
+
+		&::before {
+			position: absolute;
+			left: 8px;
+			top: 8px;
+			content: '';
+			width: 0px;
+			height: 0px;
+			border-style: solid;
+			border-width: 11px 7px 0 7px;
+			border-radius: 3px;
+			border-color: #637282 transparent transparent transparent;
+		}
+		&.down::before {
+			position: absolute;
+			left: 8px;
+			top: 0px;
+			content: '';
+			width: 0px;
+			height: 0px;
+			border-style: solid;
+			border-width: 11px 7px 7px;
+			border-radius: 3px;
+			border-color: #637282 transparent transparent transparent;
+			transform: rotate(180deg);
+		}
+	}
+	.section {
+		box-shadow: none;
+		width: ~"calc(100% - 40px)";
+		padding: 0 20px;
+
+		.name, .toggle {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.title {
+			font-size: 18px;
+			padding: 10px 0 !important;
+		}
+		&.dropdown {
+			.content {
+				max-height: 0px;
+				overflow: hidden;
+				border-left: solid 3px #637282;
+				padding-left: 10px;
+				transition: max-height 0.4s;
+
+				&.active {
+					max-height: 300px;
+				}
+			}
+		}
+
+		.teacher {
+			.name {
+				font-weight: 400;
+			}
+			.email {
+				color: #637282;
+			}
+		}
+	}
+}
+
 .button {
 	padding: 12px 16px;
 	background: @cg;

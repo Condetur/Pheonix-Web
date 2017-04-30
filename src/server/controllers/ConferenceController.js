@@ -178,7 +178,9 @@ module.exports = {
 		var conferenceId = 1;
 		var teachers = [];
 
-		if (data.teachername.length > 1) {
+		console.log(data.teachername.length);
+
+		if (data.teachername.constructor == Array) {
 			var t = 0;
 			while (data.teachername[t]) {
 				var d = {

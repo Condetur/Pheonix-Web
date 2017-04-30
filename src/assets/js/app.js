@@ -18,3 +18,13 @@ $('.teacheradd').click(function() {
 	var i = $("<div class='teacher'><div><label>Teacher Name</label><input name='teachername' required/></div><div><label>Teacher Email</label><input name='teacheremail' required/></div></div>");
 	$('.t').append(i);
 });
+
+$('.toggle-teachers').click(function() {
+	if ($('.content.teachers').hasClass('active')) {
+		$('.content.teachers').removeClass('active');
+		$('.toggle-teachers').removeClass('down');
+	} else {
+		$('.content.teachers').addClass('active');
+		$('.toggle-teachers').addClass('down');
+	}
+});
