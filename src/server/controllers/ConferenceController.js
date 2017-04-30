@@ -157,7 +157,49 @@ module.exports = {
 		var sess = req.session;
 
 		if (sess.guest == false) {
-			
+			var dais = [];
+
+			if (data.daisname.constructor == Array) {
+				var d = 0;
+
+				while (data.daisname[d]) {
+					var t = {
+						daisname: data.daisname[d],
+						daisemail: data.daisemail[d]
+					};
+
+					dais.push(t);
+
+					d++;
+				}
+			} else {
+				dais = [{daisname: data.daisname, daisemail: data.daisemail}];
+			}
+
+			dais = JSON.stringify(dais);
+
+			chair = JSON.stringify({name: data.chairname, email: data.chairemail});
+
+			var countries = [];
+
+			if (data.countryname.constructor == Array) {
+				var x = 0;
+
+				while (data.countryname[x]) {
+					var c = {
+						name: data.countryname[x],
+						delegation: data.countrydelegationname[x]
+					};
+
+					countries.push(c);
+
+					x++;
+				}
+			}
+
+			countries = JSON.stringify(countries);
+
+			var query = "INSERT INTO `Committee`(`ConferenceId`, `ChairInfo`, `DaisInfo`, `Countries`) VALUES()";
 		}
 	},
 
@@ -176,13 +218,12 @@ module.exports = {
 		var data = req.body;
 		var sess = req.session;
 
-		var conferenceId = 1;
+		var conferenceId = data.id;
 		var teachers = [];
-
-		console.log(data.teachername.length);
 
 		if (data.teachername.constructor == Array) {
 			var t = 0;
+
 			while (data.teachername[t]) {
 				var d = {
 					teachername: data.teachername[t],
