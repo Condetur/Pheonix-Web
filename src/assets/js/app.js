@@ -19,6 +19,11 @@ $('.teacheradd').click(function() {
 	$('.t').append(i);
 });
 
+$('.studentadd').click(function() {
+	var i = $("<div class='student'><div><label>Student Name</label><input name='studentname' required/></div><div><label>Student Email</label><input name='studentemail' required/></div></div>");
+	$('.s').append(i);
+});
+
 $('.toggle-teachers').click(function() {
 	var el = $(this);
 	var parent = el.parent().parent();
