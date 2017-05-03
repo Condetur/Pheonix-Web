@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<div class='bottom'>
-			<div class='group'>
+			<div class='group' style='box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);'>
 				<label class='title'>Committees</label>
 				<% if (isOwner) { %>
 					<a href='/conferences/<%= conference.id %>/addcommittee' class='add button'>Add a Committee</a>
@@ -29,7 +29,9 @@
 						<div class='committee'>
 							<div>
 								<label class='name'><%= committees[i].name %></label>
-								<a class='add button' href='/committees/<%= committees[i].id %>'>Edit</a>
+								<% if (isOwner) { %>
+									<a class='add button' href='/committees/<%= committees[i].id %>'>Edit</a>
+								<% } %>
 							</div>
 							<div class='section dropdown'>
 								<label class='title'>Countries</label>
@@ -51,7 +53,7 @@
 					<% } %>
 				<% } %>
 			</div>
-			<div class='group'>
+			<div class='group' style='box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);'>
 				<label class='title'>Delegations</label>
 				<% if (isOwner) { %>
 					<a href='/conferences/<%= conference.id %>/adddelegation' class='add button'>Add a Delegation</a>
@@ -63,7 +65,9 @@
 						<div class='delegation'>
 							<div>
 								<label class='name'><%= delegations[i].name %></label>
-								<a class='add button' href='/delegations/<%= delegations[i].id %>'>Edit</a>
+								<% if (isOwner) { %>
+									<a class='add button' href='/delegations/<%= delegations[i].id %>'>Edit</a>
+								<% } %>
 							</div>
 							<div class='section dropdown'>
 								<div>
