@@ -24,6 +24,22 @@
 				<% } %>
 			</div>
 			<div class='group'>
+				<% if (committees.length > 0) { %>
+					<% for (var i = 0; i < committees.length; i++) { %>
+						<div class='committee'>
+							<label class='name'><%= committees[i].Name %>
+							<div class='section dropdown'>
+								<label class='title'>Countries</label>
+								<span class='toggle-countries toggle'></span>
+								<div class='content countries'>
+									
+								</div>
+							</div>
+						</div>
+					<% } %>
+				<% } %>
+			</div>
+			<div class='group'>
 				<label class='title'>Delegations</label>
 				<% if (isOwner) { %>
 					<a href='/conferences/<%= conference.id %>/adddelegation' class='add button'>Add a Delegation</a>
@@ -31,7 +47,7 @@
 			</div>
 			<div class='group'>
 				<% if (delegations.length > 0) { %>
-					<% for(var i = 0; i < delegations.length; i++) { %>
+					<% for (var i = 0; i < delegations.length; i++) { %>
 						<div class='delegation'>
 							<label class='name'><%= delegations[i].Name %></label>
 							<div class='section dropdown'>
@@ -40,12 +56,12 @@
 									<span class='toggle-teachers toggle <%= i %>'></span>
 								</div>
 								<div class='content teachers <%= i %>'>
-									<% if (teachers.length > 0) { %>
-										<% for (var x = 0; x < teachers.length; x++ ) { %>
+									<% if (delegations[i].teachers.length > 0) { %>
+										<% for (var x = 0; x < delegations[i].teachers.length; x++ ) { %>
 											<div class='teacher'>
 												<div class='group'>
-													<span class='name'><%= teachers[x].teachername %></span>
-													<span class='email'><%= teachers[x].teacheremail %></span>
+													<span class='name'><%= delegations[i].teachers[x].teachername %></span>
+													<span class='email'><%= delegations[i].teachers[x].teacheremail %></span>
 												</div>
 											</div>
 										<% } %>

@@ -107,12 +107,13 @@ module.exports = {
 			}
 
 			getDelegations(conferenceId, function(resu) {
-				var delegations = resu;
-				var teachers = [];
+				var delegationInfo = resu;
+				var delegations = [];
 
-				delegations.forEach(function(el) {
-					var t = JSON.parse(el.Teachers)[0];
-					teachers.push(t);
+				delegationInfo.forEach(function(el) {
+					var teachers = JSON.parse(el.Teachers);
+					var d = {teachers: teachers, name: el.Name};
+					delegations.push(d);
 				});
 
 				getCommittees(conferenceId, function(resul) {
@@ -120,7 +121,7 @@ module.exports = {
 					var committees = [];
 
 					committeeData.forEach(function(el) {
-						var chair = JSON.parse(el.ChairInfo)[0];
+						var chair = JSON.parse(el.ChairInfo);
 
 						var daisInfo = JSON.parse(el.DaisInfo);
 						var dais = [];
@@ -130,15 +131,17 @@ module.exports = {
 
 						var countryInfo = JSON.parse(el.Countries);
 						var countries = [];
-						countries.forEach(function(c) {
+						countryInfo.forEach(function(c) {
 							countries.push(c);
 						});
 
-						var c = {chair: chair, dais: dais, countries: countries};
+						var c = {name: resul.Name, chair, dais: dais, countries: countries};
 						committees.push(c);
 					});
 
-					res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], teachers: teachers[0], isOwner: isOwner, moment: moment, delegations: delegations, committees: committees});
+					console.log(committees);
+
+					res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, delegations: delegations, committees: committees});
 				});
 			});
 		});
