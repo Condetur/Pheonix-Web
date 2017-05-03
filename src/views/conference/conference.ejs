@@ -27,7 +27,10 @@
 				<% if (committees.length > 0) { %>
 					<% for (var i = 0; i < committees.length; i++) { %>
 						<div class='committee'>
-							<label class='name'><%= committees[i].name %></label>
+							<div>
+								<label class='name'><%= committees[i].name %></label>
+								<a class='add button' href='/committees/<%= committees[i].id %>'>Edit</a>
+							</div>
 							<div class='section dropdown'>
 								<label class='title'>Countries</label>
 								<span class='toggle-countries toggle'></span>
@@ -58,7 +61,10 @@
 				<% if (delegations.length > 0) { %>
 					<% for (var i = 0; i < delegations.length; i++) { %>
 						<div class='delegation'>
-							<label class='name'><%= delegations[i].Name %></label>
+							<div>
+								<label class='name'><%= delegations[i].name %></label>
+								<a class='add button' href='/delegations/<%= delegations[i].id %>'>Edit</a>
+							</div>
 							<div class='section dropdown'>
 								<div>
 									<label class='title'>Teachers</label>

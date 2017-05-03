@@ -112,7 +112,7 @@ module.exports = {
 
 				delegationInfo.forEach(function(el) {
 					var teachers = JSON.parse(el.Teachers);
-					var d = {teachers: teachers, name: el.Name};
+					var d = {teachers: teachers, name: el.Name, id: el.id};
 					delegations.push(d);
 				});
 
@@ -135,7 +135,7 @@ module.exports = {
 							countries.push(c);
 						});
 
-						var c = {name: el.Name, chair, dais: dais, countries: countries};
+						var c = {name: el.Name, chair, dais: dais, countries: countries, id: el.id};
 
 						committees.push(c);
 					});
