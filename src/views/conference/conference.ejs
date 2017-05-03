@@ -27,12 +27,21 @@
 				<% if (committees.length > 0) { %>
 					<% for (var i = 0; i < committees.length; i++) { %>
 						<div class='committee'>
-							<label class='name'><%= committees[i].Name %>
+							<label class='name'><%= committees[i].name %></label>
 							<div class='section dropdown'>
 								<label class='title'>Countries</label>
 								<span class='toggle-countries toggle'></span>
 								<div class='content countries'>
-									
+									<% if (committees[i].countries.length > 0) { %>
+										<% for (var x = 0; x < committees[i].countries.length; x++) { %>
+											<div class='country'>
+												<div class='group'>
+													<span class='name'><%= committees[i].countries[x].name %></span>
+													<span class='delegation'><%= committees[i].countries[x].delegation %></span>
+												</div>
+											</div>
+										<% } %>
+									<% } %>
 								</div>
 							</div>
 						</div>

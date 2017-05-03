@@ -135,11 +135,10 @@ module.exports = {
 							countries.push(c);
 						});
 
-						var c = {name: resul.Name, chair, dais: dais, countries: countries};
+						var c = {name: el.Name, chair, dais: dais, countries: countries};
+
 						committees.push(c);
 					});
-
-					console.log(committees);
 
 					res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, delegations: delegations, committees: committees});
 				});
