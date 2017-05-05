@@ -28,9 +28,9 @@ function getDelegations(conferenceId, callback) {
 	});
 }
 
-function getCommittees(conferenceId, callback) {
+function getStudentsFromDelegation(delegationId, callback) {
 	var out = [];
-	var query = "SELECT * FROM `Committee` WHERE `ConferenceId` = '" + conferenceId + "'";
+	var query = "SELECT * FROM `Student` WHERE `delegationId` = '" + delegationId + "'";
 
 	connection.query(query, function(err, res) {
 		if (err) {
@@ -40,6 +40,30 @@ function getCommittees(conferenceId, callback) {
 		}
 
 		callback(out);
+	});
+}
+
+function getCommittees(conferenceId, callback) {
+	var out = [];
+	var query = "SELECT * FROM `Committee` WHERE `ConferenceId` = '" + conferenceId + "'";
+
+	connection.query(query, function(err, res) {
+		if (err) {
+			out = [];
+
+			callback(out);
+		} else {
+			out = res;
+
+			var ss = [];
+
+			out.forEach(function(el) {
+				var d = {name: el.Name, email: el.Email};
+				ss.push(d);
+			});
+
+			callback(ss);
+		}
 	});
 }
 
@@ -111,9 +135,11 @@ module.exports = {
 				var delegations = [];
 
 				delegationInfo.forEach(function(el) {
-					var teachers = JSON.parse(el.Teachers);
-					var d = {teachers: teachers, name: el.Name, id: el.id};
-					delegations.push(d);
+					getStudentsFromDelegation(el.id, function(res) {
+						var teachers = JSON.parse(el.Teachers);
+						var d = {teachers: teachers, name: el.Name, id: el.id, students: res};
+						delegations.push(d);
+					});
 				});
 
 				getCommittees(conferenceId, function(resul) {
@@ -186,8 +212,6 @@ module.exports = {
 		var data = req.session;
 
 		if (data.guest == false) {
-			connection.connect();
-
 			var query = "SELECT * FROM `Delegation` WHERE `ConferenceId` = '" + conferenceId + "'";
 
 			connection.query(query, function(err, results) {
@@ -328,13 +352,11 @@ module.exports = {
 				throw err;
 			}
 
-			
-
-			if (data.studentname.constrcutor == Array) {
+			if (data.studentname.constructor == Array) {
 				var x = 0;
 
-				while (studentname[x]) {
-					var query = "INSERT INTO `Student`(`delegationId`, `Name`, `Email`) VALUES ('" + results.insertId + "', '" + studentname[x] + "', '" + studentemail[x] + "')";
+				while (data.studentname[x]) {
+					var query = "INSERT INTO `Student`(`delegationId`, `Name`, `Email`) VALUES ('" + results.insertId + "', '" + data.studentname[x] + "', '" + data.studentemail[x] + "')";
 
 					connection.query(query, function(err, results) {
 						if (err) {
@@ -349,7 +371,7 @@ module.exports = {
 
 				res.redirect('/conferences/' + conferenceId);
 			} else {
-				var query = "INSERT INTO `Student`(`delegationId`, `Name`, `Email`) VALUES ('" + results.insertId + "', '" + studentname + "', '" + studentemail + "')";
+				var query = "INSERT INTO `Student`(`delegationId`, `Name`, `Email`) VALUES ('" + results.insertId + "', '" + data.studentname + "', '" + data.studentemail + "')";
 
 				connection.query(query, function(err, results) {
 					if (err) {
