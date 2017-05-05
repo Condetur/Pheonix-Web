@@ -48,7 +48,13 @@
 					</div>
 					<div id='btn3' style='outline:none;'>
 						<label>Delegation Name</label>
-						<input name='countrydelegationname' required/>
+						<% if (delegations.length > 0) { %>
+							<select name='countrydelegationname'>
+								<% for (var i = 0; i < delegations.length; i++) { %>
+									<option value='<%= delegations[i].Name %>'><%= delegations[i].Name %></option>
+								<% } %>
+							</select>
+						<% } %>
 					</div>
 				</div>
 			</div>

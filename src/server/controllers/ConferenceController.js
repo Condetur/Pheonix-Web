@@ -186,7 +186,19 @@ module.exports = {
 		var data = req.session;
 
 		if (data.guest == false) {
-			res.render('createcommittee', {guest: false, auth: false, conferenceId: conferenceId});
+			connection.connect();
+
+			var query = "SELECT * FROM `Delegation` WHERE `ConferenceId` = '" + conferenceId + "'";
+
+			connection.query(query, function(err, results) {
+				if (err) {
+					res.redirect('/conferences/' + conferenceId);
+				} else {
+					var delegations = results;
+
+					res.render('createcommittee', {guest: false, auth: false, conferenceId: conferenceId, delegations: delegations});
+				}
+			});
 		} else {
 			res.redirect('/');
 		}
@@ -314,8 +326,40 @@ module.exports = {
 				console.log(err);
 				res.redirect('/');
 				throw err;
-			} else {
+			}
+
+			
+
+			if (data.studentname.constrcutor == Array) {
+				var x = 0;
+
+				while (studentname[x]) {
+					var query = "INSERT INTO `Student`(`delegationId`, `Name`, `Email`) VALUES ('" + results.insertId + "', '" + studentname[x] + "', '" + studentemail[x] + "')";
+
+					connection.query(query, function(err, results) {
+						if (err) {
+							console.log(err);
+							res.redirect('/');
+							throw err;
+						}
+					})
+
+					x++;	
+				}
+
 				res.redirect('/conferences/' + conferenceId);
+			} else {
+				var query = "INSERT INTO `Student`(`delegationId`, `Name`, `Email`) VALUES ('" + results.insertId + "', '" + studentname + "', '" + studentemail + "')";
+
+				connection.query(query, function(err, results) {
+					if (err) {
+						console.log(err);
+						res.redirect('/');
+						throw err;
+					} else {
+						res.redirect('/conferences/' + conferenceId);
+					}
+				});
 			}
 		});
 	}
