@@ -53,7 +53,7 @@
 					<% } %>
 				<% } %>
 			</div>
-			<div class='group' style='box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);'>
+			<div class='group' style='box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);margin-bottom:10px;'>
 				<label class='title'>Delegations</label>
 				<% if (isOwner) { %>
 					<a href='/conferences/<%= conference.id %>/adddelegation' class='add button'>Add a Delegation</a>
@@ -93,7 +93,16 @@
 									<span class='toggle-students toggle'></span>
 								</div>
 								<div class='content students'>
-									
+									<% if (delegations[i].students.length > 0) { %>
+										<% for (var x = 0; x < delegations[i].students.length; x++) { %>
+											<div class='student'>
+												<div class='group'>
+													<span class='name'><%= delegations[i].students[x].name %></span>
+													<span class='email'><%= delegations[i].students[x].email %></span>
+												</div>
+											</div>
+										<% } %>
+									<% } %>
 								</div>
 							</div>
 						</div>

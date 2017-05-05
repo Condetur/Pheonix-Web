@@ -35,11 +35,22 @@ function getStudentsFromDelegation(delegationId, callback) {
 	connection.query(query, function(err, res) {
 		if (err) {
 			out = [];
+
+			callback(out)
 		} else {
 			out = res;
-		}
 
-		callback(out);
+			console.log(res);
+
+			var ss = [];
+
+			out.forEach(function(el) {
+				var d = {name: el.Name, email: el.Email};
+				ss.push(d);
+			});
+
+			callback(ss);
+		}
 	});
 }
 
@@ -55,14 +66,7 @@ function getCommittees(conferenceId, callback) {
 		} else {
 			out = res;
 
-			var ss = [];
-
-			out.forEach(function(el) {
-				var d = {name: el.Name, email: el.Email};
-				ss.push(d);
-			});
-
-			callback(ss);
+			callback(out);
 		}
 	});
 }

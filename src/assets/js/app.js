@@ -37,3 +37,16 @@ $('.toggle-teachers').click(function() {
 		el.addClass('down');
 	}
 });
+$('.toggle-students').click(function() {
+	var el = $(this);
+	var parent = el.parent().parent();
+	var target = parent.find('.students');
+	
+	if (target.hasClass('active')) {
+		target.removeClass('active');
+		el.removeClass('down');
+	} else {
+		target.addClass('active');
+		el.addClass('down');
+	}
+});
