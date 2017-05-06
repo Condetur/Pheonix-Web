@@ -390,6 +390,97 @@ html, body {
 	}
 }
 
+.select {
+	width: 224px !important;
+	height: 35px;
+	margin-top: 6px;
+	outline: none;
+	border: none;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+
+	select {
+		width: 100%;
+		height: 100%;
+		background: transparent !important;
+		border: none;
+		outline: none;
+	}
+}
+
+.studentssearch {
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 20px;
+
+	&.hidden {
+		display: none;
+	}
+	.list.hidden {
+		display: none;
+	}
+	.student {
+		padding: 10px;
+
+		input {
+			width: 40px;
+		}
+		input, span {
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+}
+
+.spinner {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    &.hidden {
+    	display: none;
+    }
+}
+
+.spinner-inner {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
+
+.spinner-chasing-dots {
+    -webkit-animation: spinner-chasing-dots-rotate 2s infinite linear;
+    animation: spinner-chasing-dots-rotate 2s infinite linear;
+	width: 32px;
+	height: 32px;
+}
+
+.spinner-chasing-dots .spinner-item {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: @cb;
+    border-radius: 100%;
+    -webkit-animation: spinner-chasing-dots-bounce 2s infinite ease-in-out;
+    animation: spinner-chasing-dots-bounce 2s infinite ease-in-out
+}
+
+.spinner-chasing-dots .spinner-item:last-child {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s
+}
+
 .button {
 	padding: 12px 16px;
 	background: @cg;
@@ -404,4 +495,42 @@ html, body {
 	border-radius: 100px !important;
 	font-size: 22px !important;
 	box-shadow: 0 4px 4px rgba(0,0,0,0.25) !important;
+}
+
+@-webkit-keyframes spinner-chasing-dots-rotate {
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+@keyframes spinner-chasing-dots-rotate {
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+@-webkit-keyframes spinner-chasing-dots-bounce {
+    0%, to {
+        -webkit-transform: scale(0);
+        transform: scale(0)
+    }
+
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes spinner-chasing-dots-bounce {
+    0%, to {
+        -webkit-transform: scale(0);
+        transform: scale(0)
+    }
+
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
 }

@@ -40,8 +40,6 @@ function getStudentsFromDelegation(delegationId, callback) {
 		} else {
 			out = res;
 
-			console.log(res);
-
 			var ss = [];
 
 			out.forEach(function(el) {
@@ -131,7 +129,7 @@ module.exports = {
 			if (data.guest) {
 				var guest = data.guest;
 			} else {
-				var guest = false;
+				var guest = true;
 			}
 
 			getDelegations(conferenceId, function(resu) {
@@ -169,6 +167,8 @@ module.exports = {
 
 						committees.push(c);
 					});
+
+					console.log(guest);
 
 					res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, delegations: delegations, committees: committees});
 				});
@@ -384,6 +384,29 @@ module.exports = {
 						throw err;
 					} else {
 						res.redirect('/conferences/' + conferenceId);
+					}
+				});
+			}
+		});
+	},
+
+	// Get students from name of delegation
+	getStudents(req, res) {
+		var data = req.body;
+
+		var query = "SELECT * FROM `Delegation` WHERE `ConferenceId` = '" + data.id + "' AND `Name` = '" + data.name + "'";
+
+		connection.query(query, function(err, results) {
+			if (err) {
+				res.send([false]);
+			} else {
+				var query = "SELECT * FROM `Student` WHERE `delegationId` = '" + results[0].id + "'";
+
+				connection.query(query, function(err, results) {
+					if (err) {
+						res.send([false]);
+					} else {
+						res.send(results);
 					}
 				});
 			}

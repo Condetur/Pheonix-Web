@@ -16,7 +16,8 @@ module.exports = {
 		['post', '/conference/create', 'Conference@create'],
 		['post', '/conference/update', 'Conference@edit'],
 		['post', '/committee/create', 'Conference@createCommittee'],
-		['post', '/committee/createdelegation', 'Conference@createDelegation']
+		['post', '/committee/createdelegation', 'Conference@createDelegation'],
+		['post', '/committee/getstudents', 'Conference@getStudents']
 	]
 	
 }

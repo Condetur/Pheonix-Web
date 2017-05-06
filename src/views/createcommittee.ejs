@@ -2,7 +2,7 @@
 
 <div class='wrapper' style='padding-bottom:50px;'>
 	<form class='form' method='post' action='/committee/create'>
-		<input hidden name='id' value="<%= conferenceId %>"/>
+		<input hidden name='id' value="<%= conferenceId %>" class='idhidden'/>
 		<div class='form-group'>
 			<label>Committee Name</label>
 
@@ -49,17 +49,33 @@
 					<div id='btn3' style='outline:none;'>
 						<label>Delegation Name</label>
 						<% if (delegations.length > 0) { %>
-							<select name='countrydelegationname'>
-								<% for (var i = 0; i < delegations.length; i++) { %>
-									<option value='<%= delegations[i].Name %>'><%= delegations[i].Name %></option>
-								<% } %>
-							</select>
+							<div class='select'>
+								<select name='countrydelegationname' class='countrydelegationname'>
+									<% for (var i = 0; i < delegations.length; i++) { %>
+										<option value='<%= delegations[i].Name %>'><%= delegations[i].Name %></option>
+									<% } %>
+								</select>
+							</div>
 						<% } %>
 					</div>
 				</div>
+				<div class='studentssearch hidden'>
+					<div class='search'>
+						<input class='student-search' placeholder='Search for a Student'/>
+					</div>
+					<div class='spinner hidden' style='margin-top:20px;'> 
+						<div class='spinner-inner'>
+							<div class='spinner-chasing-dots'>
+								<div class='spinner-item'></div>
+								<div class='spinner-item'></div>
+							</div>
+						</div>
+					</div>
+					<div class='list hidden'></div>
+				</div>
 			</div>
 		</div>
-		<button type='button' id='btn2' class='btncircle'>+</button>
+		<button type='button' id='btn2' class='btncircle' style='outline: none;'>+</button>
 		<div class='form-group'>
 			<button type="submit" class="btn btn-primary">
                 Continue
