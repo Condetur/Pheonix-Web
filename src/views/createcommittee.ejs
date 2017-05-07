@@ -51,6 +51,7 @@
 						<% if (delegations.length > 0) { %>
 							<div class='select'>
 								<select name='countrydelegationname' class='countrydelegationname'>
+									<option disabled selected value>Select a delegation</option>
 									<% for (var i = 0; i < delegations.length; i++) { %>
 										<option value='<%= delegations[i].Name %>'><%= delegations[i].Name %></option>
 									<% } %>

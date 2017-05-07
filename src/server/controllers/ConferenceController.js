@@ -286,13 +286,13 @@ module.exports = {
 
 			var query = "INSERT INTO `Committee`(`ConferenceId`, `ChairInfo`, `DaisInfo`, `Countries`) VALUES('" + data.id + "', '" + chair + "', '" + dais + "', '" + countries + "')";
 			
-			connection.query(query, function(err, results) {
+			/*connection.query(query, function(err, results) {
 				if (err) {
 					throw err;
 				} else {
 					res.redirect('/conferences/' + data.id);
 				}
-			});
+			});*/
 		}
 	},
 
@@ -400,15 +400,19 @@ module.exports = {
 			if (err) {
 				res.send([false]);
 			} else {
-				var query = "SELECT * FROM `Student` WHERE `delegationId` = '" + results[0].id + "'";
+				if (results[0]) {
+					var query = "SELECT * FROM `Student` WHERE `delegationId` = '" + results[0].id + "'";
 
-				connection.query(query, function(err, results) {
-					if (err) {
-						res.send([false]);
-					} else {
-						res.send(results);
-					}
-				});
+					connection.query(query, function(err, results) {
+						if (err) {
+							res.send([false]);
+						} else {
+							res.send(results);
+						}
+					});
+				} else {
+					res.send([false]);
+				}
 			}
 		});
 	}

@@ -15,10 +15,6 @@ If you don't need a controller but only a view, set the controller option equal 
 To make calls from the client to the server, we use `ajax` and `jquery`. It is fast, efficient, and supported by pretty much every browser.
 
 ### How to run the code
-TO run the code which currently lives here, you will require a couple of things. First download `node.js` from the `nodejs` website. You will also need a working installment of `mysql` with the correct database and table structures. Once you have that, download this code and cd into the directory. Then type `npm i` to download all of the dependencies as well as `npm i -g gulp`. Afterwards, type `npm run dev`. You will have a working website at this url: `localhost:3000`.
+To run the code which currently lives here, you will require a couple of things. First download `node.js` from the `nodejs` website. You will also need a working installment of `mysql` with the correct database and table structures. Once you have that, download this code and cd into the directory. Then type `npm i` to download all of the dependencies as well as `npm i -g gulp`. Afterwards, type `npm run dev`. You will have a working website at this url: `localhost:3000`.
 
 ### Thanks for reading!
-
-Please not, I have rewritten this. The old version was terrible. Code was bad, it was complicated for users, and it would be really inneficient.
-
-This new one is better. Has same principles but applies them differently.

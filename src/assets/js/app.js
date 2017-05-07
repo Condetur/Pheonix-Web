@@ -12,6 +12,9 @@ $(document).ready(function() {
 	});
 	$('#btn2').click(function() {
 		var i = countryTemplate;
+
+		i.find('.countrydelegationname').change(getDelegationsFromSelect);
+
 		$('.c').append(i);
 	});
 
@@ -54,39 +57,41 @@ $(document).ready(function() {
 
 	var countryTemplate = $('.country').clone();
 
-	$('.countrydelegationname').change(function() {
-		var el = $(this);
-		var parent = el.parent().parent().parent().parent();
-		var target = parent.find('.studentssearch');
-
-		target.find('.list').empty();
-		target.find('.spinner').removeClass('hidden');
-
-		target.removeClass('hidden');
-
-		var committeeId = $('.idhidden').val();
-		var delegationName = el.val();
-
-		$.ajax({
-			method: 'POST',
-			url: '/committee/getstudents',
-			data: {
-				id: committeeId,
-				name: delegationName
-			},
-			success: function(res) {
-				for (var i = 0; i < res.length; i++) {
-					$('.spinner').addClass('hidden');
-
-					var e = $("<div class='student'><input type='checkbox' name='studentselected'/><span class='name'>" + res[i].Name + "</span></div>");
-					target.find('.list').append(e);
-				}
-
-				target.find('.list').removeClass('hidden');
-			},
-			error: function(res) {
-
-			}
-		});
-	});
+	$('.countrydelegationname').change(getDelegationsFromSelect);
 });
+
+function getDelegationsFromSelect() {
+	var el = $(this);
+	var parent = el.parent().parent().parent().parent();
+	var target = parent.find('.studentssearch');
+
+	target.find('.list').empty();
+	target.find('.spinner').removeClass('hidden');
+
+	target.removeClass('hidden');
+
+	var committeeId = $('.idhidden').val();
+	var delegationName = el.val();
+
+	$.ajax({
+		method: 'POST',
+		url: '/committee/getstudents',
+		data: {
+			id: committeeId,
+			name: delegationName
+		},
+		success: function(res) {
+			for (var i = 0; i < res.length; i++) {
+				$('.spinner').addClass('hidden');
+
+				var e = $("<div class='student'><input type='checkbox' name='studentselected'/><span class='name'>" + res[i].Name + "</span></div>");
+				target.find('.list').append(e);
+			}
+
+			target.find('.list').removeClass('hidden');
+		},
+		error: function(res) {
+
+		}
+	});
+}
