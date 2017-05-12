@@ -1,7 +1,7 @@
 <link rel='stylesheet' href='/css/mdl.css'/>
 
 <div class='wrapper' style='padding-bottom:50px;'>
-	<form class='form' method='post' action='/committee/create'>
+	<form class='form createcommittee' method='post'>
 		<input hidden name='id' value="<%= conferenceId %>" class='idhidden'/>
 		<div class='form-group'>
 			<label>Committee Name</label>
@@ -15,11 +15,11 @@
 
 			<div>
 				<label>Chair Name</label>
-				<input name='chairname' required/>
+				<input name='chairname' class='chairname' required/>
 			</div>
 			<div>
 				<label>Chair Email</label>
-				<input name='chairemail' required/>
+				<input name='chairemail' class='chairemail' required/>
 			</div>
 		</div>
 		<div class='form-group d'>
@@ -44,7 +44,7 @@
 				<div class='group'>
 					<div>
 						<label>Country Name</label>
-						<input name='countryname' required/>
+						<input name='countryname' class='countryname' required/>
 					</div>
 					<div id='btn3' style='outline:none;'>
 						<label>Delegation Name</label>

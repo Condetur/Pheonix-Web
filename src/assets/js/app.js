@@ -12,10 +12,13 @@ $(document).ready(function() {
 	});
 	$('#btn2').click(function() {
 		var i = countryTemplate;
+		var length = $('.countryname').length
 
+		var x = ("<input hidden name='split " + $('.countryname')[length - 1] + "'/>");
 		i.find('.countrydelegationname').change(getDelegationsFromSelect);
 
 		$('.c').append(i);
+		$('.c').append
 	});
 
 	$('.teacheradd').click(function() {
@@ -24,7 +27,7 @@ $(document).ready(function() {
 	});
 
 	$('.studentadd').click(function() {
-		var i = $("<div class='student'><div><label>Student Name</label><input name='studentname' required/></div><div><label>Student Email</label><input name='studentemail' required/></div></div>");
+		var i = $("<div class='student'><div><label>Student Name</label><input name='studentname' required/></div><div><label>Student Email</label><label name='studentemail' required/></div></div>");
 		$('.s').append(i);
 	});
 
@@ -84,7 +87,7 @@ function getDelegationsFromSelect() {
 			for (var i = 0; i < res.length; i++) {
 				$('.spinner').addClass('hidden');
 
-				var e = $("<div class='student'><input type='checkbox' name='studentselected'/><span class='name'>" + res[i].Name + "</span></div>");
+				var e = $("<div class='student'><input type='checkbox' id='studentselected' name='studentselected' value='" + res[i].id +"'/><span id='name' class='name'>" + res[i].Name + "</span></div>");
 				target.find('.list').append(e);
 			}
 
@@ -95,3 +98,62 @@ function getDelegationsFromSelect() {
 		}
 	});
 }
+
+function handleCommitteeCreation(e) {
+	e.preventDefault()
+	var chairData = [$('.chairname').val(), $('.chairemail').val()];
+
+	var dais = [];
+
+	$('.dais').each(function(index, value) {
+		// Use index
+		var el = $(index);
+
+		var d = {name: el.find('.daisname').val(), email: el.find('.daisemail').val()};
+	});
+
+	var countries = [];
+
+	$('.c').each(function(index, value) {
+		var el = $(index);
+
+		var name = el.find('.countryname').val();
+		var delegationName = el.find('.countrydelegationname').val();
+
+		var students = [];
+		var x = 0;
+
+		var studentselected = document.getElementById('studentselected');
+
+		if (studentselected.constructor == Array) {
+			while(studentselected[x]) {
+				var s = {id: studentselected[x].value, selected: studentselected[x].checked};
+
+				students.push(s);
+				x++;
+			}
+		} else {
+			var s = {id: studentselected.value, selected: studentselected.checked};
+
+			students.push(s);
+		}
+
+		var c = {name: name, delegationName: delegationName, students: students};
+
+		countries.push(c);
+	});
+
+	$.ajax({
+		type: 'POST',
+		url: '/committee/create',
+		data: {chair: chairData, dais: dais, countries: countries, conferenceId: $('id').val()},
+		success: function(res) {
+			location.href = '/@me';
+		},
+		error: function(res) {
+			location.href = '/@me';
+		}
+	});
+}
+
+$('.createcommittee').submit(handleCommitteeCreation);

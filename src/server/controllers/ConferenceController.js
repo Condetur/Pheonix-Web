@@ -126,10 +126,16 @@ module.exports = {
 				isOwner = true;
 			}
 
-			if (data.guest) {
-				var guest = data.guest;
+			var guest;
+
+			if (data.guest != null) {
+				if (data.guest == false) {
+					guest = false;
+				} else {
+					guest = true;
+				}
 			} else {
-				var guest = true;
+				guest = true;
 			}
 
 			getDelegations(conferenceId, function(resu) {
@@ -167,8 +173,6 @@ module.exports = {
 
 						committees.push(c);
 					});
-
-					console.log(guest);
 
 					res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, delegations: delegations, committees: committees});
 				});
@@ -237,62 +241,14 @@ module.exports = {
 		var sess = req.session;
 
 		if (sess.guest == false) {
-			var dais = [];
-
-			if (data.daisname.constructor == Array) {
-				var d = 0;
-
-				while (data.daisname[d]) {
-					var t = {
-						daisname: data.daisname[d],
-						daisemail: data.daisemail[d]
-					};
-
-					dais.push(t);
-
-					d++;
-				}
-			} else {
-				dais = [{daisname: data.daisname, daisemail: data.daisemail}];
-			}
-
-			dais = JSON.stringify(dais);
-
-			chair = JSON.stringify([{name: data.chairname, email: data.chairemail}]);
-
 			var countries = [];
 
-			if (data.countryname.constructor == Array) {
-				var x = 0;
+			data.countries.forEach(function(el) {
+				var name = el.name;
 
-				while (data.countryname[x]) {
-					var c = {
-						name: data.countryname[x],
-						delegation: data.countrydelegationname[x]
-					};
-
-					countries.push(c);
-
-					x++;
-				}
-			} else {
-				var countries = [{
-					name: data.countryname,
-					delegation: data.countrydelegationname
-				}];
-			}
-
-			countries = JSON.stringify(countries);
-
-			var query = "INSERT INTO `Committee`(`ConferenceId`, `ChairInfo`, `DaisInfo`, `Countries`) VALUES('" + data.id + "', '" + chair + "', '" + dais + "', '" + countries + "')";
-			
-			/*connection.query(query, function(err, results) {
-				if (err) {
-					throw err;
-				} else {
-					res.redirect('/conferences/' + data.id);
-				}
-			});*/
+				countries.push(name);
+			});
+			var query = "INSERT INTO `Committee`(`ConferenceId`, `ChairInfo`, `DaisInfo`, `Countries`, `Name`) VALUES ()";
 		}
 	},
 
