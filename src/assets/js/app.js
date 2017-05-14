@@ -87,7 +87,7 @@ function getDelegationsFromSelect() {
 			for (var i = 0; i < res.length; i++) {
 				$('.spinner').addClass('hidden');
 
-				var e = $("<div class='student'><input type='checkbox' id='studentselected' name='studentselected' value='" + res[i].id +"'/><span id='name' class='name'>" + res[i].Name + "</span></div>");
+				var e = $("<div class='student'><input type='checkbox' class='studentselected' name='studentselected' value='" + res[i].id +"'/><span id='name' class='name'>" + res[i].Name + "</span></div>");
 				target.find('.list').append(e);
 			}
 
@@ -107,51 +107,52 @@ function handleCommitteeCreation(e) {
 
 	$('.dais').each(function(index, value) {
 		// Use index
-		var el = $(index);
+		var el = $(value);
 
 		var d = {name: el.find('.daisname').val(), email: el.find('.daisemail').val()};
+
+		dais.push(d);
 	});
 
 	var countries = [];
 
-	$('.c').each(function(index, value) {
-		var el = $(index);
+	$('.country').each(function(index, value) {
+		var el = $(value);
 
 		var name = el.find('.countryname').val();
 		var delegationName = el.find('.countrydelegationname').val();
 
 		var students = [];
-		var x = 0;
 
-		var studentselected = document.getElementById('studentselected');
+		el.find('.studentselected').each(function(index, value) {
+			var el = $(value);
 
-		if (studentselected.constructor == Array) {
-			while(studentselected[x]) {
-				var s = {id: studentselected[x].value, selected: studentselected[x].checked};
-
+			if (el.is(':checked')) {
+				var s = {id: el.value};
+				
 				students.push(s);
-				x++;
 			}
-		} else {
-			var s = {id: studentselected.value, selected: studentselected.checked};
-
-			students.push(s);
-		}
+		});
 
 		var c = {name: name, delegationName: delegationName, students: students};
 
 		countries.push(c);
 	});
 
+	var data = {chair: chairData, dais: dais, countries: countries, conferenceId: $('#id').val()};
+
+	console.log(data);
+
 	$.ajax({
 		type: 'POST',
 		url: '/committee/create',
-		data: {chair: chairData, dais: dais, countries: countries, conferenceId: $('id').val()},
+		data: data,
 		success: function(res) {
-			location.href = '/@me';
+			if (res) {
+				location.href = '/@me';
+			}
 		},
 		error: function(res) {
-			location.href = '/@me';
 		}
 	});
 }

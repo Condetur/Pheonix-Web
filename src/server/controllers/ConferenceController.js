@@ -242,13 +242,52 @@ module.exports = {
 
 		if (sess.guest == false) {
 			var countries = [];
+			var dais = [];
 
-			data.countries.forEach(function(el) {
-				var name = el.name;
+			if (data.countries) {
+				if (data.countries.constructor == Array) {
+					data.countries.forEach(function(el) {
+						var name = el.name;
 
-				countries.push(name);
+						countries.push(name);
+					});
+				} else {
+					countries = [data.countries[0].name];
+				}
+			}
+
+			if (data.dais) {
+				if (data.dais.constructor == Array) {
+					data.dais.forEach(function(el) {
+						var d = {name: el.name, email: el.email};
+
+						dais.push(d);
+					});
+				} else {
+					dais = [{name: data.dais.name, email: data.dais.email}];
+				}
+			}
+
+			var query = "INSERT INTO `Committee`(`ConferenceId`, `ChairInfo`, `DaisInfo`, `Countries`, `Name`) VALUES ('" + data.id + "', '" + JSON.stringify(data.chair) +"', '" + JSON.stringify(dais) +"', '" + JSON.stringify(countries) + "', '" + data.name + "')";
+
+			connection.query(query, function(err, results) {
+				if (err) {
+				} else {
+					data.countries.forEach(function(el) {
+						var students = el.students;
+
+						var query = "UPDATE `Student` SET `Country` ='" + el.name + "' `committeeId` = '" + results.insertId + "'";
+
+						connection.query(query, function(err, results) {
+							if (err) {
+								throw err;
+							}
+						});
+					});
+
+					res.send(true);
+				}
 			});
-			var query = "INSERT INTO `Committee`(`ConferenceId`, `ChairInfo`, `DaisInfo`, `Countries`, `Name`) VALUES ()";
 		}
 	},
 

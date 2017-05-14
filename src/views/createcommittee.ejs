@@ -2,7 +2,7 @@
 
 <div class='wrapper' style='padding-bottom:50px;'>
 	<form class='form createcommittee' method='post'>
-		<input hidden name='id' value="<%= conferenceId %>" class='idhidden'/>
+		<input hidden name='id' value="<%= conferenceId %>" id='id' class='idhidden'/>
 		<div class='form-group'>
 			<label>Committee Name</label>
 
@@ -28,11 +28,11 @@
 			<div class='dais'>
 				<div>
 					<label>Dais Name</label>
-					<input name='daisname' required/>
+					<input class='daisname' name='daisname' required/>
 				</div>
 				<div>
 					<label>Dais Email</label>
-					<input name='daisemail' required/>
+					<input class='daisemail' name='daisemail' required/>
 				</div>
 			</div>
 		</div>
