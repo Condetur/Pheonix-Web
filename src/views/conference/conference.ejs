@@ -41,11 +41,28 @@
 										<% for (var x = 0; x < committees[i].countries.length; x++) { %>
 											<div class='country'>
 												<div class='group'>
-													<span class='name'><%= committees[i].countries[x].name %></span>
-													<span class='delegation'><%= committees[i].countries[x].delegation %></span>
+													<span class='name'><%= committees[i].countries[x] %></span>
 												</div>
 											</div>
 										<% } %>
+									<% } %>
+								</div>
+							</div>
+							<div class='section dropdown'>
+								<label class='title'>Chair Info</label>
+								<span class='toggle-countries toggle'></span>
+								<div class='content countries'>
+									<label class='name'><%= committees[i].chair[0] %></label>
+									<label class='email'><%= committees[i].chair[1] %></label>
+								</div>
+							</div>
+							<div class='section dropdown'>
+								<label class='title'>Dais Info</label>
+								<span class='toggle-countries toggle'></span>
+								<div class='content countries'>
+									<% for (var x = 0; x < committees[i].dais.length; x++) { %>
+										<label class='name'><%= committees[i].chair[0] %></label>
+										<label class='email'><%= committees[i].chair[1] %></label>
 									<% } %>
 								</div>
 							</div>

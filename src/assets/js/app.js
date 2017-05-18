@@ -128,7 +128,7 @@ function handleCommitteeCreation(e) {
 			var el = $(value);
 
 			if (el.is(':checked')) {
-				var s = {id: el.value};
+				var s = {id: el.val()};
 				
 				students.push(s);
 			}
@@ -139,14 +139,13 @@ function handleCommitteeCreation(e) {
 		countries.push(c);
 	});
 
-	var data = {chair: chairData, dais: dais, countries: countries, conferenceId: $('#id').val()};
+	var data = {name: $('.committeename').val(), chair: chairData, dais: dais, countries: countries, conferenceId: $('#id').val()};
 
-	console.log(data);
 
 	$.ajax({
 		type: 'POST',
 		url: '/committee/create',
-		data: data,
+		data: {data: JSON.stringify([data])},
 		success: function(res) {
 			if (res) {
 				location.href = '/@me';

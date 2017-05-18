@@ -174,6 +174,7 @@ module.exports = {
 						committees.push(c);
 					});
 
+
 					res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, delegations: delegations, committees: committees});
 				});
 			});
@@ -237,7 +238,7 @@ module.exports = {
 	},
 
 	createCommittee: function(req, res) {
-		var data = req.body;
+		var data = JSON.parse(req.body.data)[0];
 		var sess = req.session;
 
 		if (sess.guest == false) {
@@ -268,24 +269,29 @@ module.exports = {
 				}
 			}
 
-			var query = "INSERT INTO `Committee`(`ConferenceId`, `ChairInfo`, `DaisInfo`, `Countries`, `Name`) VALUES ('" + data.id + "', '" + JSON.stringify(data.chair) +"', '" + JSON.stringify(dais) +"', '" + JSON.stringify(countries) + "', '" + data.name + "')";
+			var query = "INSERT INTO `Committee`(`ConferenceId`, `ChairInfo`, `DaisInfo`, `Countries`, `Name`) VALUES ('" + data.conferenceId + "', '" + JSON.stringify(data.chair) + "', '" + JSON.stringify(dais) + "', '" + JSON.stringify(countries) + "', '" + data.name + "')";
 
 			connection.query(query, function(err, results) {
 				if (err) {
+					console.log(err);
 				} else {
-					data.countries.forEach(function(el) {
-						var students = el.students;
+					if (data.countries.constructor == Array) {
+						data.countries.forEach(function(el) {
+							var students = el.students;
 
-						var query = "UPDATE `Student` SET `Country` ='" + el.name + "' `committeeId` = '" + results.insertId + "'";
+							students.forEach(function(stu) {
+								var query = "UPDATE `Student` SET `Country` = '" + el.name + "', `committeeId` = '" + results.insertId + "' WHERE `id` = '" + stu.id + "'";
 
-						connection.query(query, function(err, results) {
-							if (err) {
-								throw err;
-							}
+								connection.query(query, function(err, results) {
+									if (err) {
+										throw err;
+									}
+								});
+							});	
 						});
-					});
-
-					res.send(true);
+					}
+					
+					//res.send(true);
 				}
 			});
 		}
