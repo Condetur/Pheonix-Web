@@ -61,6 +61,10 @@ $(document).ready(function() {
 	var countryTemplate = $('.country').clone();
 
 	$('.countrydelegationname').change(getDelegationsFromSelect);
+
+	if ($('.createdebate')) {
+		getCommitteesForDebate();
+	}
 });
 
 function getDelegationsFromSelect() {
@@ -157,3 +161,16 @@ function handleCommitteeCreation(e) {
 }
 
 $('.createcommittee').submit(handleCommitteeCreation);
+
+function getCommitteesForDebate() {
+	var conferenceId = $('#id').val();
+
+	$.ajax({
+		type: 'POST',
+		url: '/committee/getcommittees',
+		data: {conferenceId: conferenceId},
+		success: function(res) {
+			console.log(res);
+		}
+	});
+}

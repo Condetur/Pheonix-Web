@@ -122,7 +122,7 @@ module.exports = {
 			}
 
 			var isOwner = false;
-			if (conferenceId == data.userid) {
+			if (data.userid == results[0].UserId) {
 				isOwner = true;
 			}
 
@@ -415,6 +415,44 @@ module.exports = {
 					res.send([false]);
 				}
 			}
+		});
+	},
+
+	addDebate(req, res) {
+		var conferenceId = req.params.conferenceId;
+		var sess = req.session;
+
+		var query = "SELECT * FROM `Conferences` WHERE id = '" + conferenceId + "'";
+
+		connection.query(query, function(err, results) {
+			if (err) {
+				throw err;
+			}
+
+			if (sess.userid == results[0].UserId) {
+				var isOwner = true;
+				console.log('foo');
+
+				res.render('createdebate.ejs', {guest: false, auth: false, conferenceId: conferenceId});
+			}
+		});
+	},
+
+	getCommitteesFromId(req, res) {
+		var conferenceId = req.body.conferenceId;
+
+		var query = "SELECT * FROM `Committee` WHERE `ConferenceId` = '" + conferenceId + "'";
+
+		connection.query(query, function(err, results) {
+			if (err) {
+				res.send(false);
+
+				throw err;
+			}
+
+			console.log(results);
+
+			res.send(results);
 		});
 	}
 

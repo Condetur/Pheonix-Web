@@ -1,4 +1,4 @@
-module.exports = {
+	module.exports = {
 
 	Routes: [
 		['get', '/', 'Home@index'],
@@ -10,6 +10,7 @@ module.exports = {
 		['get', '/conferences/:conferenceId/addcommittee', 'Conference@addCommittee'],
 		['get', '/conferences/:conferenceId/edit', 'Conference@editConference'],
 		['get', '/conferences/:conferenceId/adddelegation', 'Conference@addDelegation'],
+		['get', '/conferences/:conferenceId/adddebate', 'Conference@addDebate'],
 
 		['post', '/user/register', 'Auth/Register@register'],
 		['post', '/user/login', 'Auth/Login@login'],
@@ -17,7 +18,8 @@ module.exports = {
 		['post', '/conference/update', 'Conference@edit'],
 		['post', '/committee/create', 'Conference@createCommittee'],
 		['post', '/committee/createdelegation', 'Conference@createDelegation'],
-		['post', '/committee/getstudents', 'Conference@getStudents']
+		['post', '/committee/getstudents', 'Conference@getStudents'],
+		['post', '/committee/getcommittees', 'Conference@getCommitteesFromId']
 	]
 	
 }
