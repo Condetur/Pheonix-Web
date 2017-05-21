@@ -20,7 +20,8 @@
 		['post', '/committee/createdelegation', 'Conference@createDelegation'],
 		['post', '/committee/getstudents', 'Conference@getStudents'],
 		['post', '/committee/getcommittees', 'Conference@getCommitteesFromId'],
-		['post', '/student/getstudents', 'Conference@getStudentsFromCommitteeId']
+		['post', '/student/getstudents', 'Conference@getStudentsFromCommitteeId'],
+		['post', '/debate/create', 'Conference@createDebate']
 	]
 	
 }

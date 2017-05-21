@@ -232,3 +232,48 @@ function showProperDebateType(e) {
 		$('.unmodcaucus').addClass('show');
 	}
 }
+
+$('.createdebate').submit(handleDebateSubmit);
+
+function handleDebateSubmit(e) {
+	e.preventDefault();
+
+	var debateName = $('#debatename');
+	var type = $('#debatetype');
+
+	var node = $('.type .show');
+	var results = node.find('.committeeresults');
+	var committeeNodes = results.find('.committee');
+	var committees = [];
+
+	committeeNodes.each(index, value) {
+		var el = $(index);
+
+		var participating = el.find('#committeeselected').is(':checked');
+
+		if (participating) {
+			var name = el.find('.name');
+
+			var studentNodes = el.find('.student');
+			var students = [];
+
+			studentNodes.each(index, value) {
+				var el = $(index);
+
+				var attending = el.find('#studentselected').is(':checked');
+
+				if (attending) {
+					var name = el.find('.name');
+					var speechtiming = el.find('#studenttiming');
+
+					var s = {name: name, speechtiming: speechtiming};
+
+					students.push(s);
+				}
+			}
+
+			var c = {name: name, students: students};
+			committees.push(c);
+		}
+	}
+}
