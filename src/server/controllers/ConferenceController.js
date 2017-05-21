@@ -431,7 +431,6 @@ module.exports = {
 
 			if (sess.userid == results[0].UserId) {
 				var isOwner = true;
-				console.log('foo');
 
 				res.render('createdebate.ejs', {guest: false, auth: false, conferenceId: conferenceId});
 			}

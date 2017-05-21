@@ -172,7 +172,7 @@ function getCommitteesForDebate() {
 		success: function(res) {
 			if (res) {
 				res.forEach(function(el) {
-					var el = $("<div class='committee'><label class='name'>" + el.Name + "</label><div class='group'><label>Attending: </label><input type='checkbox' value='" + el.id + "' id='committeeselected'/></div></div>");
+					var el = $("<div class='committee'><label class='name'>" + el.Name + "</label><div class='group'><label>Attending: </label><input type='checkbox' value='" + el.id + "' id='committeeselected'/><div class='studentresults'></div></div></div>");
 
 					el.find('#committeeselected').change(handleCommitteeSelected);
 
@@ -185,11 +185,14 @@ function getCommitteesForDebate() {
 
 function handleCommitteeSelected(e) {
 	var el = $(e.currentTarget);
+	var committeeNode = el.parent().parent();
 
 	var committeeId = el.val();
+
+	getStudentsFromCommitteeId(committeeId, committeeNode);
 }
 
-function getStudentsFromCommitteeId(id) {
+function getStudentsFromCommitteeId(id, node) {
 	var conferenceId = $('#id').val();
 
 	$.ajax({
@@ -197,7 +200,13 @@ function getStudentsFromCommitteeId(id) {
 		url: '/student/getstudents',
 		data: {committeeId: id},
 		success: function(res) {
-			console.log(res);
+			if (res) {
+				res.forEach(function(el) {
+					var el = $("<div class='student'><label class='name'>" + el.Name + "</label><div class='group'><label>Participating: </label><input type='checkbox' value='" + el.id + "' id='studentselected'/></div>");
+				
+					node.find('.studentresults').append(el);
+				});
+			}
 		}
 	});
 }

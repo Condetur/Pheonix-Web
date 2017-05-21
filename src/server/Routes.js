@@ -19,7 +19,8 @@
 		['post', '/committee/create', 'Conference@createCommittee'],
 		['post', '/committee/createdelegation', 'Conference@createDelegation'],
 		['post', '/committee/getstudents', 'Conference@getStudents'],
-		['post', '/committee/getcommittees', 'Conference@getCommitteesFromId']
+		['post', '/committee/getcommittees', 'Conference@getCommitteesFromId'],
+		['post', '/student/getstudents', 'Conference@getStudentsFromCommitteeId']
 	]
 	
 }
