@@ -172,7 +172,7 @@ function getCommitteesForDebate() {
 		success: function(res) {
 			if (res) {
 				res.forEach(function(el) {
-					var el = $("<div class='committee'><label class='name'>" + el.Name + "</label><div class='group'><label>Attending: </label><input type='checkbox' id='committeeselected'/></div></div>");
+					var el = $("<div class='committee'><label class='name'>" + el.Name + "</label><div class='group'><label>Attending: </label><input type='checkbox' value='" + el.id + "' id='committeeselected'/></div></div>");
 
 					el.find('#committeeselected').change(handleCommitteeSelected);
 
@@ -184,5 +184,20 @@ function getCommitteesForDebate() {
 }
 
 function handleCommitteeSelected(e) {
-	console.log(e);
+	var el = $(e.currentTarget);
+
+	var committeeId = el.val();
+}
+
+function getStudentsFromCommitteeId(id) {
+	var conferenceId = $('#id').val();
+
+	$.ajax({
+		type: 'POST',
+		url: '/student/getstudents',
+		data: {committeeId: id},
+		success: function(res) {
+			console.log(res);
+		}
+	});
 }

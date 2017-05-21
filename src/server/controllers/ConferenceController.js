@@ -450,7 +450,21 @@ module.exports = {
 				throw err;
 			}
 
-			console.log(results);
+			res.send(results);
+		});
+	},
+
+	getStudentsFromCommitteeId(req, res) {
+		var committeeId = req.body.committeeId;
+
+		var query = "SELECT * FROM `Student` WHERE `committeeId` = '" + committeeId + "'";
+
+		connection.query(query, function(err, results) {
+			if (err) {
+				res.send(false);
+
+				throw err;
+			}
 
 			res.send(results);
 		});
