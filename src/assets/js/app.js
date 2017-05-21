@@ -64,6 +64,8 @@ $(document).ready(function() {
 
 	if ($('.createdebate')) {
 		getCommitteesForDebate();
+
+		$("#debatetype").change(showProperDebateType);
 	}
 });
 
@@ -145,7 +147,6 @@ function handleCommitteeCreation(e) {
 
 	var data = {name: $('.committeename').val(), chair: chairData, dais: dais, countries: countries, conferenceId: $('#id').val()};
 
-
 	$.ajax({
 		type: 'POST',
 		url: '/committee/create',
@@ -202,11 +203,32 @@ function getStudentsFromCommitteeId(id, node) {
 		success: function(res) {
 			if (res) {
 				res.forEach(function(el) {
-					var el = $("<div class='student'><label class='name'>" + el.Name + "</label><div class='group'><label>Participating: </label><input type='checkbox' value='" + el.id + "' id='studentselected'/></div>");
+					var el = $("<div class='student'><label class='name'>" + el.Name + "</label><div class='group'><label>Participating: </label><input type='checkbox' value='" + el.id + "' id='studentselected'/></div><div class='group'><label>Timing of Speech(minutes):</label><input id='studenttiming'/></div></div>");
+					var caucus = $("<div class='student'><label class='name'>" + el.Name + "</label><div class='group'><label>Participating: </label><input type='checkbox' value='" + el.id + "' id='studentselected'/></div></div>");
 				
-					node.find('.studentresults').append(el);
+					if (node.parent().parent().hasClass('unmodcaucus')) {
+						node.find('.studentresults').append(caucus);
+					} else {
+						node.find('.studentresults').append(el);
+					}
 				});
 			}
 		}
 	});
+}
+
+function showProperDebateType(e) {
+	if (e.currentTarget.value == 'Moderated Caucus') {
+		$('.modcaucus').addClass('show');
+		$('.speakerslist').removeClass('show');
+		$('.unmodcaucus').removeClass('show');
+	} else if (e.currentTarget.value == 'Speakers List') {
+		$('.modcaucus').removeClass('show');
+		$('.speakerslist').addClass('show');
+		$('.unmodcaucus').removeClass('show');
+	} else if (e.currentTarget.value == 'Un-moderated Caucus') {
+		$('.modcaucus').removeClass('show');
+		$('.speakerslist').removeClass('show');
+		$('.unmodcaucus').addClass('show');
+	}
 }

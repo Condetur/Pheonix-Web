@@ -5,10 +5,34 @@
 			<label>Debate Name</label>
 
 			<div>
-				<input name='name' class='debateename' required autofocus/>
+				<input name='name' id='debatename' class='debateename' required autofocus/>
 			</div>
 		</div>
 		<div class='form-group'>
+			<label>Type of Debate</label>
+
+			<div>
+				<select id='debatetype'>
+					<option disabled selected value>Select a Type</option>
+					<option>Speakers List</option>
+					<option>Moderated Caucus</option>
+					<option>Un-moderated Caucus</option>
+				</select>
+			</div>
+		</div>
+		<div class='form-group type speakerslist'>
+			<label>Committee in Debate</label>
+
+			<div class='committeeresults'>
+			</div>
+		</div>
+		<div class='form-group type modcaucus'>
+			<label>Committee in Debate</label>
+
+			<div class='committeeresults'>
+			</div>
+		</div>
+		<div class='form-group type unmodcaucus'>
 			<label>Committee in Debate</label>
 
 			<div class='committeeresults'>
