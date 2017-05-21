@@ -170,7 +170,19 @@ function getCommitteesForDebate() {
 		url: '/committee/getcommittees',
 		data: {conferenceId: conferenceId},
 		success: function(res) {
-			console.log(res);
+			if (res) {
+				res.forEach(function(el) {
+					var el = $("<div class='committee'><label class='name'>" + el.Name + "</label><div class='group'><label>Attending: </label><input type='checkbox' id='committeeselected'/></div></div>");
+
+					el.find('#committeeselected').change(handleCommitteeSelected);
+
+					$('.committeeresults').append(el);
+				});
+			}
 		}
 	});
+}
+
+function handleCommitteeSelected(e) {
+	console.log(e);
 }
