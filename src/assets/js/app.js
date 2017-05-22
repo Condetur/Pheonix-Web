@@ -238,42 +238,62 @@ $('.createdebate').submit(handleDebateSubmit);
 function handleDebateSubmit(e) {
 	e.preventDefault();
 
-	var debateName = $('#debatename');
-	var type = $('#debatetype');
+	var debateName = document.getElementById('debatename').value;
+	var type = $('#debatetype').val();
 
-	var node = $('.type .show');
+	var node = $('.type.show');
 	var results = node.find('.committeeresults');
 	var committeeNodes = results.find('.committee');
 	var committees = [];
 
-	committeeNodes.each(index, value) {
-		var el = $(index);
+	committeeNodes.each(function(index, value) {
+		var el = $(value);
 
 		var participating = el.find('#committeeselected').is(':checked');
 
 		if (participating) {
-			var name = el.find('.name');
+			var name = el.find('.name').html();
 
 			var studentNodes = el.find('.student');
 			var students = [];
 
-			studentNodes.each(index, value) {
-				var el = $(index);
+			studentNodes.each(function(index, value) {
+				var el = $(value);
 
 				var attending = el.find('#studentselected').is(':checked');
 
 				if (attending) {
-					var name = el.find('.name');
-					var speechtiming = el.find('#studenttiming');
+					var name = el.find('.name').html();
+					var speechTiming = el.find('#studenttiming').val();
 
-					var s = {name: name, speechtiming: speechtiming};
+					var s = {name: name, speechTiming: speechTiming};
 
 					students.push(s);
 				}
-			}
+			});
 
 			var c = {name: name, students: students};
 			committees.push(c);
 		}
-	}
+	});
+
+	var data = {
+		committees: committees,
+		name: debateName,
+		type: type,
+		id: $('#id').val()
+	};
+	console.log(data);
+	data = JSON.stringify(data);
+
+	$.ajax({
+		type: 'POST',
+		url: '/debate/add',
+		data: {data: data},
+		success: function(res) {
+			if (res) {
+				location.href = '/@me';
+			}
+		}
+	});
 }

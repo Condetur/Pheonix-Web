@@ -467,6 +467,24 @@ module.exports = {
 
 			res.send(results);
 		});
+	},
+
+	createDebate(req, res) {
+		var data = JSON.parse(req.body.data);
+		var committees = data.committees;
+		var students = [];
+
+		committees.forEach(function(el) {
+			var s = el.students;
+
+			s.forEach(function(el) {
+				students.push(el);
+			});
+		});
+
+		students = JSON.stringify(students);
+
+		var query = "INSERT INTO `ModeratedCaucus`(`Speaches`, `Name`) VALUES('" + students + "', '" + data.Name + "')";
 	}
 
 }
