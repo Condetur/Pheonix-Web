@@ -476,6 +476,7 @@ module.exports = {
 
 	getStudentsFromCommitteeId(req, res) {
 		var committeeId = req.body.committeeId;
+		console.log(committeeId);
 
 		var query = "SELECT * FROM `Student` WHERE `committeeId` = '" + committeeId + "'";
 
