@@ -62,6 +62,6 @@ ls.on('close', (data) => {
 	console.log('Gulp ended: ' + `${data}`);
 });
 
-app.listen(app.get('port'), function() {
+app.listen(3000, function() {
 	console.log(chalk.cyan('App started on port 3000'));
 });
