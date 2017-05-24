@@ -4,7 +4,8 @@
   "description": "Website for pheonix",
   "main": "src/server/index.js",
   "scripts": {
-    "test": "node .",
+    "start": "node .",
+    "postinstall": "g",
     "dev": "nodemon . --ignore src/assets --ignore src/public"
   },
   "author": "Tino Caer",

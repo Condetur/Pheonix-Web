@@ -28,3 +28,5 @@ gulp.task('watch', function() {
 	gulp.watch('less/*.less', ['less']);
 	gulp.watch('js/app.js', ['js']);
 });
+
+gulp.task('build', ['js', 'less']);
