@@ -88,24 +88,6 @@
 							</div>
 							<div class='section dropdown'>
 								<div>
-									<label class='title'>Teachers</label>
-									<span class='toggle-teachers toggle <%= i %>'></span>
-								</div>
-								<div class='content teachers <%= i %>'>
-									<% if (delegations[i].teachers.length > 0) { %>
-										<% for (var x = 0; x < delegations[i].teachers.length; x++ ) { %>
-											<div class='teacher'>
-												<div class='group'>
-													<span class='name'><%= delegations[i].teachers[x].teachername %></span>
-													<span class='email'><%= delegations[i].teachers[x].teacheremail %></span>
-												</div>
-											</div>
-										<% } %>
-									<% } %>
-								</div>
-							</div>
-							<div class='section dropdown'>
-								<div>
 									<label class='title'>Students</label>
 									<span class='toggle-students toggle'></span>
 								</div>
@@ -116,6 +98,24 @@
 												<div class='group'>
 													<span class='name'><%= delegations[i].students[x].name %></span>
 													<span class='email'><%= delegations[i].students[x].email %></span>
+												</div>
+											</div>
+										<% } %>
+									<% } %>
+								</div>
+							</div>
+							<div class='section dropdown'>
+								<div>
+									<label class='title'>Teachers</label>
+									<span class='toggle-teachers toggle <%= i %>'></span>
+								</div>
+								<div class='content teachers <%= i %>'>
+									<% if (delegations[i].teachers.length > 0) { %>
+										<% for (var x = 0; x < delegations[i].teachers.length; x++ ) { %>
+											<div class='teacher'>
+												<div class='group'>
+													<span class='name'><%= delegations[i].teachers[x].teachername %></span>
+													<span class='email'><%= delegations[i].teachers[x].teacheremail %></span>
 												</div>
 											</div>
 										<% } %>
