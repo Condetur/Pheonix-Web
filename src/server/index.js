@@ -13,6 +13,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var app = express();
 
+app.set('port', (process.env.PORT || 5000));
+
 app.use(express.static(path.join(__dirname , '../public')));
 app.use(session({
 	secret: 'blueocean5',
@@ -60,6 +62,6 @@ ls.on('close', (data) => {
 	console.log('Gulp ended: ' + `${data}`);
 });
 
-app.listen(3000, function() {
+app.listen(app.get('port'), function() {
 	console.log(chalk.cyan('App started on port 3000'));
 });
