@@ -59,13 +59,27 @@ function getCommittees(conferenceId, callback) {
 	connection.query(query, function(err, res) {
 		if (err) {
 			out = [];
-
-			callback(out);
 		} else {
 			out = res;
-
-			callback(out);
 		}
+
+		callback(out);
+	});
+}
+
+function getDebates(conferenceId, callback) {
+	var out = [];
+
+	var query = "SELECT * FROM `ModeratedCaucus` WHERE `ConferenceId` = '" + conferenceId + "'";
+
+	connection.query(query, function(err, res) {
+		if (err) {
+			out = [];
+		} else {
+			out = res;
+		}
+
+		callback(out);
 	});
 }
 
@@ -174,7 +188,15 @@ module.exports = {
 						committees.push(c);
 					});
 
+					getDebates(conferenceId, function(result) {
+						var debateData = result;
+						var debates = [];
 
+						debateData.forEach(function(el) {
+							
+						});
+					});
+					
 					res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, delegations: delegations, committees: committees});
 				});
 			});
@@ -484,7 +506,19 @@ module.exports = {
 
 		students = JSON.stringify(students);
 
-		var query = "INSERT INTO `ModeratedCaucus`(`Speaches`, `Name`) VALUES('" + students + "', '" + data.Name + "')";
+		var query = "INSERT INTO `ModeratedCaucus`(`Speaches`, `Name`, `ConferenceId`, `Type`) VALUES('" + students + "', '" + data.Name + "', '" + data.id + "', '" + data.type + "')";
+
+		connection.query(query, function(err, results) {
+			if (err) {
+				res.send(false);
+
+				console.log(err);
+
+				throw err;
+			} else {
+				res.send(true);
+			}
+		});
 	}
 
 }
