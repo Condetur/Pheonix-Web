@@ -312,7 +312,7 @@ module.exports = {
 						});
 					}
 					
-					//res.send(true);
+					res.send(true);
 				}
 			});
 		}

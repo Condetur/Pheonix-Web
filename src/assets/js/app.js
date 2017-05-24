@@ -106,7 +106,6 @@ function getDelegationsFromSelect() {
 }
 
 function handleCommitteeCreation(e) {
-	console.log('foo');
 	e.preventDefault()
 	var chairData = [$('.chairname').val(), $('.chairemail').val()];
 
@@ -153,6 +152,7 @@ function handleCommitteeCreation(e) {
 		url: '/committee/create',
 		data: {data: JSON.stringify([data])},
 		success: function(res) {
+			console.log('foo');
 			if (res) {
 				location.href = '/@me';
 			}
