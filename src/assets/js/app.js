@@ -17,8 +17,9 @@ $(document).ready(function() {
 		var x = ("<input hidden name='split " + $('.countryname')[length - 1] + "'/>");
 		i.find('.countrydelegationname').change(getDelegationsFromSelect);
 
-		conosle.log(i);
+		console.log(i);
 		$('.c').append(i);
+		i.append(x);
 	});
 
 	$('.teacheradd').click(function() {
