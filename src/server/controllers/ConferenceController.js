@@ -486,6 +486,7 @@ module.exports = {
 				throw err;
 			}
 
+			console.log(results);
 			res.send(results);
 		});
 	},
