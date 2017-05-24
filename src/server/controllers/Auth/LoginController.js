@@ -21,7 +21,7 @@ module.exports = {
 		if (guest) {
 			res.render('auth/login.ejs', {guest: guest, title: 'Pheonix', auth: true})
 		} else {
-			res.redirect('162.243.186.156/@me');
+			res.redirect('/@me');
 		}
 	},
 
@@ -45,7 +45,7 @@ module.exports = {
 				sess.guest = false;
 				sess.userid = results[0].id || results.id;
 
-				res.redirect('162.243.186.156/@me');
+				res.redirect('/@me');
 
 				connection.destroy();
 			}
