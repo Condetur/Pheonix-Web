@@ -1,2 +1,2 @@
-cd ../src/assets
+cd src/assets
 gulp build
