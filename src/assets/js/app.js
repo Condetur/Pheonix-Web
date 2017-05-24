@@ -106,6 +106,7 @@ function getDelegationsFromSelect() {
 }
 
 function handleCommitteeCreation(e) {
+	console.log('foo');
 	e.preventDefault()
 	var chairData = [$('.chairname').val(), $('.chairemail').val()];
 
