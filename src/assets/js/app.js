@@ -196,6 +196,7 @@ function handleCommitteeSelected(e) {
 
 function getStudentsFromCommitteeId(id, node) {
 	var conferenceId = $('#id').val();
+	console.log('foo');
 
 	$.ajax({
 		type: 'POST',
