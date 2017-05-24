@@ -12,13 +12,12 @@ $(document).ready(function() {
 	});
 	$('#btn2').click(function() {
 		var i = countryTemplate;
-		var length = $('.countryname').length
+		var length = $('.countryname').length;
 
 		var x = ("<input hidden name='split " + $('.countryname')[length - 1] + "'/>");
 		i.find('.countrydelegationname').change(getDelegationsFromSelect);
 
 		$('.c').append(i);
-		$('.c').append
 	});
 
 	$('.teacheradd').click(function() {
