@@ -11,7 +11,7 @@ $(document).ready(function() {
 		$('.d').append(i);
 	});
 	$('#btn2').click(function() {
-		var i = countryTemplate;
+		var i = countryTemplate.clone();
 		var length = $('.countryname').length;
 
 		var x = ("<input hidden name='split " + $('.countryname')[length - 1] + "'/>");
