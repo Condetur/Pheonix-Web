@@ -1,0 +1,24 @@
+<link href="/css/pikaday.css" rel="stylesheet">
+
+<div class='wrapper'>
+	<form class='form' action='/committee/update' method='POST'>
+		<input hidden value="<%= data.id %>" name='id'/>
+		<div class='form-group'>
+			<label for="name" class="control-label">Committee Name</label>
+
+            <div>
+                <input id="name" type="text" class="form-control" name="name" value="<%= data.Title %>" required autofocus>
+            </div>
+		</div>
+
+        <div class='form-group'>
+
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+              	Update Info
+            </button>
+        </div>
+	</form>
+</div>

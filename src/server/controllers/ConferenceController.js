@@ -476,7 +476,6 @@ module.exports = {
 
 	getStudentsFromCommitteeId(req, res) {
 		var committeeId = req.body.committeeId;
-		console.log(committeeId);
 
 		var query = "SELECT * FROM `Student` WHERE `committeeId` = '" + committeeId + "'";
 
@@ -487,7 +486,6 @@ module.exports = {
 				throw err;
 			}
 
-			console.log(results);
 			res.send(results);
 		});
 	},
@@ -520,6 +518,10 @@ module.exports = {
 				res.send(true);
 			}
 		});
+	},
+
+	editCommittee(req, res) {
+		res.render('editcommittee.ejs', {guest: false, auth: false, id: committeeId});
 	}
 
 }

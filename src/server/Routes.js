@@ -11,6 +11,7 @@
 		['get', '/conferences/:conferenceId/edit', 'Conference@editConference'],
 		['get', '/conferences/:conferenceId/adddelegation', 'Conference@addDelegation'],
 		['get', '/conferences/:conferenceId/adddebate', 'Conference@addDebate'],
+		['get', '/committee/:committeeId/edit', 'Conference@editCommittee'],
 
 		['post', '/user/register', 'Auth/Register@register'],
 		['post', '/user/login', 'Auth/Login@login'],
