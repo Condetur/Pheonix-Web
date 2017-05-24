@@ -84,7 +84,7 @@ function getDelegationsFromSelect() {
 
 	$.ajax({
 		method: 'POST',
-		url: '/committee/getstudents',
+		url: '162.243.186.156/committee/getstudents',
 		data: {
 			id: committeeId,
 			name: delegationName
@@ -149,11 +149,11 @@ function handleCommitteeCreation(e) {
 
 	$.ajax({
 		type: 'POST',
-		url: '/committee/create',
+		url: '162.243.186.156/committee/create',
 		data: {data: JSON.stringify([data])},
 		success: function(res) {
 			if (res) {
-				location.href = '/@me';
+				location.href = '162.243.186.156/@me';
 			}
 		},
 		error: function(res) {
@@ -198,7 +198,7 @@ function getStudentsFromCommitteeId(id, node) {
 
 	$.ajax({
 		type: 'POST',
-		url: '/student/getstudents',
+		url: '162.243.186.156/student/getstudents',
 		data: {committeeId: id},
 		success: function(res) {
 			if (res) {
@@ -283,16 +283,15 @@ function handleDebateSubmit(e) {
 		type: type,
 		id: $('#id').val()
 	};
-	console.log(data);
 	data = JSON.stringify(data);
 
 	$.ajax({
 		type: 'POST',
-		url: '/debate/add',
+		url: '162.243.186.156/debate/add',
 		data: {data: data},
 		success: function(res) {
 			if (res) {
-				location.href = '/@me';
+				location.href = '162.243.186.156/@me';
 			}
 		}
 	});

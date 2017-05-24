@@ -111,14 +111,14 @@ module.exports = {
 				if (err) {
 					console.log(err);
 					connection.destroy();
-					res.redirect('/');
+					res.redirect('162.243.186.156/');
 				}
 
 				connection.destroy();
-				res.redirect('/@me');
+				res.redirect('162.243.186.156/@me');
 			});
 		} else {
-			res.redirect('/');
+			res.redirect('162.243.186.156/');
 		}
 	},
 
@@ -132,7 +132,7 @@ module.exports = {
 			if (err) {
 				console.log(err);
 				connection.destroy();
-				res.redirect('/');
+				res.redirect('162.243.186.156/');
 			}
 
 			var isOwner = false;
@@ -213,13 +213,13 @@ module.exports = {
 			if (err) {
 				console.log(err);
 				connection.destroy();
-				res.redirect('/');
+				res.redirect('162.243.186.156/');
 			}
 
 			if (results.length > 0) {
 				res.render('conference/editconference.ejs', {guest: data.guest, auth: false, data: results[0]});
 			} else {
-				res.redirect('/conference/' + conferenceId);
+				res.redirect('162.243.186.156/conference/' + conferenceId);
 			}
 		});
 	},
@@ -233,7 +233,7 @@ module.exports = {
 			if (err) {
 				console.log(err);
 			} else {
-				res.redirect('/conferences/' + data.id);
+				res.redirect('162.243.186.156/conferences/' + data.id);
 			}
 		});
 	},
@@ -247,7 +247,7 @@ module.exports = {
 
 			connection.query(query, function(err, results) {
 				if (err) {
-					res.redirect('/conferences/' + conferenceId);
+					res.redirect('162.243.186.156/conferences/' + conferenceId);
 				} else {
 					var delegations = results;
 
@@ -255,7 +255,7 @@ module.exports = {
 				}
 			});
 		} else {
-			res.redirect('/');
+			res.redirect('162.243.186.156/');
 		}
 	},
 
@@ -326,7 +326,7 @@ module.exports = {
 		if (data.guest == false) {
 			res.render('createdelegation', {guest: false, auth: false, conferenceId: conferenceId});
 		} else {
-			res.redirect('/');
+			res.redirect('162.243.186.156/');
 		}
 	},
 
@@ -375,7 +375,7 @@ module.exports = {
 		connection.query(query, function(err, results) {
 			if (err) {
 				console.log(err);
-				res.redirect('/');
+				res.redirect('162.243.186.156/');
 				throw err;
 			}
 
@@ -388,7 +388,7 @@ module.exports = {
 					connection.query(query, function(err, results) {
 						if (err) {
 							console.log(err);
-							res.redirect('/');
+							res.redirect('162.243.186.156/');
 							throw err;
 						}
 					})
@@ -396,7 +396,7 @@ module.exports = {
 					x++;	
 				}
 
-				res.redirect('/conferences/' + conferenceId);
+				res.redirect('162.243.186.156/conferences/' + conferenceId);
 			} else {
 				var query = "INSERT INTO `Student`(`delegationId`, `Name`, `Email`) VALUES ('" + results.insertId + "', '" + data.studentname + "', '" + data.studentemail + "')";
 
@@ -406,7 +406,7 @@ module.exports = {
 						res.redirect('/');
 						throw err;
 					} else {
-						res.redirect('/conferences/' + conferenceId);
+						res.redirect('162.243.186.156/conferences/' + conferenceId);
 					}
 				});
 			}
