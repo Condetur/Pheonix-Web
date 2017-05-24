@@ -114,7 +114,6 @@ module.exports = {
 					res.redirect('/');
 				}
 
-				connection.destroy();
 				res.redirect('/@me');
 			});
 		} else {
