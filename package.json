@@ -5,7 +5,6 @@
   "main": "src/server/index.js",
   "scripts": {
     "start": "node .",
-    "postinstall": "bash build/build.sh",
     "dev": "nodemon . --ignore src/assets --ignore src/public"
   },
   "author": "Tino Caer",
