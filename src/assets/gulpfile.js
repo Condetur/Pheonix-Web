@@ -23,6 +23,10 @@ gulp.task('less', function() {
 		.pipe(concat('bundle.css'))
 		.pipe(gulp.dest('../public/css'));
 });
+gulp.task('clone', function() {
+	return gulp.src('img/logo.png')
+		.pipe(gulp.dest('../public/img'));
+});
 
 gulp.task('watch', function() {
 	gulp.watch('less/*.less', ['less']);
