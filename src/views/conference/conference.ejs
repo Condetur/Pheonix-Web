@@ -126,10 +126,30 @@
 					<% } %>
 				<% } %>
 			</div>
-			<div class='group'>
+			<div class='group' style='box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);margin-bottom:10px;'>
 				<label class='title'>Your Debates</label>
 				<% if (isOwner) { %>
 					<a href='/conferences/<%= conference.id %>/adddebate' class='add button'>Add a Debate</a>
+				<% } %>
+			</div>
+			<div class='group'>
+				<% if (debates.length > 0) { %>
+					<% for (var i = 0; i < debates.length; i++ ) { %>
+						<div class='debate'>
+							<div>
+								<label class='name'><%= debates[i].name %></label>
+							</div>
+							<div>
+								<label>Speaches</label>
+								<% for (var x = 0; x < debates[i].speaches.length; x++ ) { %>
+									<div class='speech'>
+										<label class='student'><%= debates[i].speaches[x].name %></label>
+										<label class='time'>Speech is <%= debates[i].speaches[x].speechTiming %> minutes long</label>
+									</div>
+								<% } %>
+							</div>
+						</div>
+					<% } %>
 				<% } %>
 			</div>
 		</div>

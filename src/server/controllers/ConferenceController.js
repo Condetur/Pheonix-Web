@@ -192,11 +192,11 @@ module.exports = {
 						var debates = [];
 
 						debateData.forEach(function(el) {
-							
+							debates.push({name: el.Name, type: el.Type, speaches: JSON.parse(el.Speaches)});
 						});
+
+						res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, delegations: delegations, committees: committees, debates: debates});
 					});
-					
-					res.render('conference/conference.ejs', {guest: guest, auth: false, conference: results[0], isOwner: isOwner, moment: moment, delegations: delegations, committees: committees});
 				});
 			});
 		});
@@ -505,7 +505,7 @@ module.exports = {
 
 		students = JSON.stringify(students);
 
-		var query = "INSERT INTO `ModeratedCaucus`(`Speaches`, `Name`, `ConferenceId`, `Type`) VALUES('" + students + "', '" + data.Name + "', '" + data.id + "', '" + data.type + "')";
+		var query = "INSERT INTO `ModeratedCaucus`(`Speaches`, `Name`, `ConferenceId`, `Type`) VALUES('" + students + "', '" + data.name + "', '" + data.id + "', '" + data.type + "')";
 
 		connection.query(query, function(err, results) {
 			if (err) {
