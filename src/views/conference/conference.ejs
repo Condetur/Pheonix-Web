@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<div class='bottom'>
-			<div class='group' style='box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);'>
+			<div class='group' style='box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);margin-bottom:10px;'>
 				<label class='title'>Committees</label>
 				<% if (isOwner) { %>
 					<a href='/conferences/<%= conference.id %>/addcommittee' class='add button'>Add a Committee</a>
@@ -61,8 +61,8 @@
 								<span class='toggle-countries toggle'></span>
 								<div class='content countries'>
 									<% for (var x = 0; x < committees[i].dais.length; x++) { %>
-										<label class='name'><%= committees[i].chair[0] %></label>
-										<label class='email'><%= committees[i].chair[1] %></label>
+										<label class='name'><%= committees[i].dais[i].name %></label>
+										<label class='email'><%= committees[i].dais[i].email %></label>
 									<% } %>
 								</div>
 							</div>
