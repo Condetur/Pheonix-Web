@@ -294,7 +294,7 @@ function handleDebateSubmit(e) {
 		data: {data: data},
 		success: function(res) {
 			if (res) {
-				location.href = '/@me';
+				location.href = '/conferences/' + data.id;
 			}
 		}
 	});
