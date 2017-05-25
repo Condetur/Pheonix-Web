@@ -33,4 +33,4 @@ gulp.task('watch', function() {
 	gulp.watch('js/app.js', ['js']);
 });
 
-gulp.task('build', ['js', 'less']);
+gulp.task('build', ['js', 'less', 'clone']);
