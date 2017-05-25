@@ -1,4 +1,4 @@
-<div class='wrapper'>
+<div class='wrapper' style='margin-bottom: 20px;'>
 	<div class='conferencepage'>
 		<div class='top'>
 			<label class='title'><%= conference.Title %></label>
@@ -29,9 +29,9 @@
 						<div class='committee'>
 							<div>
 								<label class='name'><%= committees[i].name %></label>
-								<% if (isOwner) { %>
+								<!--<% if (isOwner) { %>
 									<a class='add button' href='/committees/<%= committees[i].id %> /edit'>Edit</a>
-								<% } %>
+								<% } %>-->
 							</div>
 							<div class='section dropdown'>
 								<label class='title'>Countries</label>
@@ -50,19 +50,21 @@
 							</div>
 							<div class='section dropdown'>
 								<label class='title'>Chair Info</label>
-								<span class='toggle-countries toggle'></span>
-								<div class='content countries'>
-									<label class='name'><%= committees[i].chair[0] %></label>
-									<label class='email'><%= committees[i].chair[1] %></label>
+								<span class='toggle-chair toggle'></span>
+								<div class='content chair'>
+									<label class='name'>Name: <%= committees[i].chair[0] %></label>
+									<label class='email'>Email: <%= committees[i].chair[1] %></label>
 								</div>
 							</div>
 							<div class='section dropdown'>
 								<label class='title'>Dais Info</label>
-								<span class='toggle-countries toggle'></span>
-								<div class='content countries'>
+								<span class='toggle-dais toggle'></span>
+								<div class='content dais'>
 									<% for (var x = 0; x < committees[i].dais.length; x++) { %>
-										<label class='name'><%= committees[i].dais[x].name %></label>
-										<label class='email'><%= committees[i].dais[x].email %></label>
+										<div class='d'>
+											<label class='name'>Name: <%= committees[i].dais[x].name %></label>
+											<label class='email'>Email: <%= committees[i].dais[x].email %></label>
+										</div>
 									<% } %>
 								</div>
 							</div>
@@ -82,9 +84,9 @@
 						<div class='delegation'>
 							<div>
 								<label class='name'><%= delegations[i].name %></label>
-								<% if (isOwner) { %>
+								<!--<% if (isOwner) { %>
 									<a class='add button' href='/delegations/<%= delegations[i].id %>'>Edit</a>
-								<% } %>
+								<% } %>-->
 							</div>
 							<div class='section dropdown'>
 								<div>
@@ -96,8 +98,8 @@
 										<% for (var x = 0; x < delegations[i].students.length; x++) { %>
 											<div class='student'>
 												<div class='group'>
-													<span class='name'><%= delegations[i].students[x].name %></span>
-													<span class='email'><%= delegations[i].students[x].email %></span>
+													<span class='name'>Name: <%= delegations[i].students[x].name %></span>
+													<span class='email'>Email: <%= delegations[i].students[x].email %></span>
 												</div>
 											</div>
 										<% } %>
@@ -114,8 +116,8 @@
 										<% for (var x = 0; x < delegations[i].teachers.length; x++ ) { %>
 											<div class='teacher'>
 												<div class='group'>
-													<span class='name'><%= delegations[i].teachers[x].teachername %></span>
-													<span class='email'><%= delegations[i].teachers[x].teacheremail %></span>
+													<span class='name'>Name: <%= delegations[i].teachers[x].teachername %></span>
+													<span class='email'>Email: <%= delegations[i].teachers[x].teacheremail %></span>
 												</div>
 											</div>
 										<% } %>
@@ -132,21 +134,26 @@
 					<a href='/conferences/<%= conference.id %>/adddebate' class='add button'>Add a Debate</a>
 				<% } %>
 			</div>
-			<div class='group'>
+			<div class='group' style='padding-bottom: 20px;'>
 				<% if (debates.length > 0) { %>
 					<% for (var i = 0; i < debates.length; i++ ) { %>
 						<div class='debate'>
 							<div>
 								<label class='name'><%= debates[i].name %></label>
 							</div>
-							<div>
-								<label>Speaches</label>
-								<% for (var x = 0; x < debates[i].speaches.length; x++ ) { %>
-									<div class='speech'>
-										<label class='student'><%= debates[i].speaches[x].name %></label>
-										<label class='time'>Speech is <%= debates[i].speaches[x].speechTiming %> minutes long</label>
-									</div>
-								<% } %>
+							<div class='section dropdown'>
+								<div>
+									<label class='title'>Speaches</label>
+									<span class='toggle-debate toggle <%= i %>'></span>
+								</div>
+								<div class='content speeches'>
+									<% for (var x = 0; x < debates[i].speaches.length; x++ ) { %>
+										<div class='speech'>
+											<label class='student'>Name: <%= debates[i].speaches[x].name %></label>
+											<label class='time'>Their speech is <%= debates[i].speaches[x].speechTiming %> minutes long</label>
+										</div>
+									<% } %>
+								</div>
 							</div>
 						</div>
 					<% } %>

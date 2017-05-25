@@ -322,45 +322,13 @@ html, body {
 	margin: 0 20px 10px;
 	padding: 0 10px;
 	box-shadow: none;
-	border-left: solid 3px #637282;
+	border-left: solid 2px #637282;
 	display: block;
 
 	.name {
 		font-size: 20px;
 		font-weight: 700;
 		color: #637282;
-	}
-	.toggle {
-		width: 26px;
-		height: 26px;
-		position: relative;
-		cursor: pointer;
-
-		&::before {
-			position: absolute;
-			left: 8px;
-			top: 8px;
-			content: '';
-			width: 0px;
-			height: 0px;
-			border-style: solid;
-			border-width: 11px 7px 0 7px;
-			border-radius: 3px;
-			border-color: #637282 transparent transparent transparent;
-		}
-		&.down::before {
-			position: absolute;
-			left: 8px;
-			top: 0px;
-			content: '';
-			width: 0px;
-			height: 0px;
-			border-style: solid;
-			border-width: 11px 7px 7px;
-			border-radius: 3px;
-			border-color: #637282 transparent transparent transparent;
-			transform: rotate(180deg);
-		}
 	}
 	.section {
 		box-shadow: none;
@@ -378,11 +346,15 @@ html, body {
 		&.dropdown {
 			box-shadow: none;
 
+			.title {
+				paddding: 0;
+			}
 			.content {
 				max-height: 0px;
 				overflow: hidden;
-				border-left: solid 3px #637282;
-				padding-left: 10px;
+				border-left: solid 2px #637282;
+				padding-left: 5px;
+				margin-left: 35px;
 				transition: max-height 0.4s;
 
 				&.active {
@@ -399,6 +371,25 @@ html, body {
 				color: #637282;
 			}
 		}
+	}
+}
+.students .student {
+	margin: 6px 0;
+
+	span {
+		display: block !important;
+		font-weight: 400;
+		color: @cbl;
+		font-size: 16px;
+		padding: 4px 0;
+	}
+}
+.teachers .teacher {
+	span {
+		display: block !important;
+		font-weight: 400;
+		color: @cbl;
+		font-size: 16px;
 	}
 }
 
@@ -447,12 +438,12 @@ html, body {
 .committeeresults {
 	.committee {
 		padding-left: 20px;
-		border-left: solid 3px #637282;
+		border-left: solid 2px #637282;
 
 		.group {
 			display: block;
 			padding-left: 10px;
-			border-left: solid 3px #637282;
+			border-left: solid 2px #637282;
 
 			label, input {
 				display: inline-block;
@@ -495,7 +486,7 @@ html, body {
 }
 
 .committee {
-	border-left: solid 3px #637282;
+	border-left: solid 2px #637282;
 	margin: 0 20px 10px;
 	padding: 0 10px;
 
@@ -503,6 +494,135 @@ html, body {
 		font-weight: 700;
 		color: #637282;
 		font-size: 20px;
+	}
+	.dropdown {
+		padding: 0 20px !important;
+		width: 80%;
+
+		.title {
+			font-size: 18px;
+			padding: 10px 0px 10px 10px !important;
+		}
+		.content {
+			max-height: 0px;
+			overflow: hidden;
+			padding-left: 5px;
+			margin-left: 35px;
+			transition: max-height 0.4s;
+
+			&.active {
+				max-height: 300px;
+			}
+			.name {
+				font-weight: 400;
+				font-size: 16px;
+			}
+		}
+		.countries {
+			label {
+				display: block;
+				color: @cbl;
+				font-size: 15px;
+			}
+		}
+		.country {
+			border-left: solid 2px #637282;
+			padding-left: 5px;
+		}
+		.dais {
+			border-left: solid 2px #637282;
+
+			label {
+				display: block;
+				color: @cbl;
+			}
+		}
+		.chair {
+			border-left: solid 2px #637282;
+
+			label {
+				display: block;
+				color: @cbl;
+			}
+		}
+	}
+}
+.toggle {
+	width: 26px;
+	height: 26px;
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	cursor: pointer;
+	margin-bottom: 4px;
+
+	&::before {
+		position: absolute;
+		left: 8px;
+		top: 8px;
+		content: '';
+		width: 0px;
+		height: 0px;
+		border-style: solid;
+		border-width: 11px 7px 0 7px;
+		border-radius: 3px;
+		border-color: #637282 transparent transparent transparent;
+	}
+	&.down::before {
+		position: absolute;
+		left: 8px;
+		top: 0px;
+		content: '';
+		width: 0px;
+		height: 0px;
+		border-style: solid;
+		border-width: 11px 7px 7px;
+		border-radius: 3px;
+		border-color: #637282 transparent transparent transparent;
+		transform: rotate(180deg);
+	}
+}
+.debate {
+	margin: 0 20px 10px;
+	padding: 0 10px;
+	border-left: #637282 2px solid;
+
+	.name {
+		font-weight: 700;
+		color: @cbl;
+		font-size: 20px;
+	}
+	.dropdown {
+		padding: 0 20px !important;
+		width: 80%;
+
+		.title {
+			font-size: 18px;
+			padding: 10px 0px 10px 10px !important;
+			color: @cbl;
+			font-weight: 700;
+		}
+		.content {
+			border-left: solid 2px #637282;
+			max-height: 0px;
+			overflow: hidden;
+			padding-left: 5px;
+			margin-left: 35px;
+			transition: max-height 0.4s;
+
+			&.active {
+				max-height: 300px;
+			}
+			.speech {
+				margin: 4px 0;
+
+				label {
+					display: block;
+					font-size: 16px;
+					padding: 4px 0;
+				}
+			}
+		}
 	}
 }
 

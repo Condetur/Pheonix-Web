@@ -58,6 +58,59 @@ $(document).ready(function() {
 			el.addClass('down');
 		}
 	});
+	$('.toggle-countries').click(function() {
+		var el = $(this);
+		var parent = el.parent().parent();
+		var target = parent.find('.countries');
+		
+		if (target.hasClass('active')) {
+			target.removeClass('active');
+			el.removeClass('down');
+		} else {
+			target.addClass('active');
+			el.addClass('down');
+		}
+	});
+	$('.toggle-chair').click(function() {
+		var el = $(this);
+		var parent = el.parent().parent();
+		var target = parent.find('.chair');
+		
+		if (target.hasClass('active')) {
+			target.removeClass('active');
+			el.removeClass('down');
+		} else {
+			target.addClass('active');
+			el.addClass('down');
+		}
+	});
+	$('.toggle-dais').click(function() {
+		var el = $(this);
+		var parent = el.parent().parent();
+		var target = parent.find('.dais');
+		
+		if (target.hasClass('active')) {
+			target.removeClass('active');
+			el.removeClass('down');
+		} else {
+			target.addClass('active');
+			el.addClass('down');
+		}
+	});
+	$('.toggle-debate').click(function() {
+		var el = $(this);
+		var parent = el.parent().parent();
+		var target = parent.find('.speeches');
+		
+		if (target.hasClass('active')) {
+			target.removeClass('active');
+			el.removeClass('down');
+		} else {
+			target.addClass('active');
+			el.addClass('down');
+		}
+	});
+
 
 	var countryTemplate = $('.country').clone();
 
