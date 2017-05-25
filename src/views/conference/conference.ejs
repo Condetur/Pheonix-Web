@@ -61,13 +61,11 @@
 								<span class='toggle-countries toggle'></span>
 								<div class='content countries'>
 									<% for (var x = 0; x < committees[i].dais.length; x++) { %>
-										<label class='name'><%= committees[i].dais[i].name %></label>
-										<label class='email'><%= committees[i].dais[i].email %></label>
+										<label class='name'><%= committees[i].dais[x].name %></label>
+										<label class='email'><%= committees[i].dais[x].email %></label>
 									<% } %>
 								</div>
 							</div>
-							
-							<%= committees[i].dais[0].name %>
 						</div>
 					<% } %>
 				<% } %>
